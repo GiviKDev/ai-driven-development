@@ -36,3 +36,94 @@ jobs:
             'README.md'
             'CONTRIBUTING.md'
           fail: true
+
+  plugin-validate:
+    name: Plugin Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate plugin.json files are valid JSON
+        run: |
+          jq empty plugin/plugin.json
+          jq empty plugin/.claude-plugin/plugin.json
+
+      - name: Check required fields in Copilot manifest
+        run: |
+          for field in name description version skills agents; do
+            value=$(jq -r ".$field" plugin/plugin.json)
+            if [ "$value" = "null" ] || [ -z "$value" ]; then
+              echo "ERROR: Missing required field '$field' in plugin/plugin.json"
+              exit 1
+            fi
+          done
+          echo "Copilot manifest OK"
+
+      - name: Check required fields in Claude Code manifest
+        run: |
+          for field in name description version; do
+            value=$(jq -r ".$field" plugin/.claude-plugin/plugin.json)
+            if [ "$value" = "null" ] || [ -z "$value" ]; then
+              echo "ERROR: Missing required field '$field' in plugin/.claude-plugin/plugin.json"
+              exit 1
+            fi
+          done
+          echo "Claude Code manifest OK"
+
+      - name: Check manifests are in sync
+        run: |
+          copilot_name=$(jq -r '.name' plugin/plugin.json)
+          claude_name=$(jq -r '.name' plugin/.claude-plugin/plugin.json)
+          copilot_version=$(jq -r '.version' plugin/plugin.json)
+          claude_version=$(jq -r '.version' plugin/.claude-plugin/plugin.json)
+
+          if [ "$copilot_name" != "$claude_name" ]; then
+            echo "ERROR: Name mismatch: '$copilot_name' vs '$claude_name'"
+            exit 1
+          fi
+          if [ "$copilot_version" != "$claude_version" ]; then
+            echo "ERROR: Version mismatch: '$copilot_version' vs '$claude_version'"
+            exit 1
+          fi
+          echo "Manifests in sync: $copilot_name@$copilot_version"
+
+      - name: Validate SKILL.md frontmatter
+        run: |
+          failed=0
+          for skill in plugin/skills/*/SKILL.md; do
+            dir=$(basename "$(dirname "$skill")")
+
+            # Extract YAML frontmatter between --- markers
+            frontmatter=$(sed -n '/^---$/,/^---$/p' "$skill" | sed '1d;$d')
+
+            for field in name description argument-hint; do
+              if ! echo "$frontmatter" | grep -q "^${field}:"; then
+                echo "ERROR: $skill missing '$field' in frontmatter"
+                failed=1
+              fi
+            done
+
+            # Check skill name matches directory name
+            skill_name=$(echo "$frontmatter" | grep '^name:' | sed 's/^name: *//')
+            if [ "$skill_name" != "$dir" ]; then
+              echo "ERROR: $skill name '$skill_name' does not match directory '$dir'"
+              failed=1
+            fi
+          done
+
+          if [ $failed -eq 1 ]; then exit 1; fi
+          echo "All skills valid"
+
+      - name: Validate agent files
+        run: |
+          if [ ! -d plugin/agents ] || [ -z "$(ls plugin/agents/*.agent.md 2>/dev/null)" ]; then
+            echo "ERROR: No agent files found in plugin/agents/"
+            exit 1
+          fi
+          for agent in plugin/agents/*.agent.md; do
+            if [ ! -s "$agent" ]; then
+              echo "ERROR: $agent is empty"
+              exit 1
+            fi
+          done
+          echo "All agents valid"

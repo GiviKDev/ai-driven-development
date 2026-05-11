@@ -28,6 +28,27 @@ pre-commit: ## Run all pre-commit hooks on all files
 	@echo ""
 	@echo "All pre-commit checks passed."
 
+# --- Plugin ---
+
+.PHONY: validate-plugin
+validate-plugin: ## Validate plugin manifests and skills
+	@jq empty plugin/plugin.json && echo "plugin.json: valid JSON"
+	@jq empty plugin/.claude-plugin/plugin.json && echo ".claude-plugin/plugin.json: valid JSON"
+	@copilot=$$(jq -r '.version' plugin/plugin.json); \
+	 claude=$$(jq -r '.version' plugin/.claude-plugin/plugin.json); \
+	 if [ "$$copilot" != "$$claude" ]; then \
+	   echo "ERROR: version mismatch $$copilot vs $$claude"; exit 1; \
+	 fi; \
+	 echo "Manifests in sync: $$copilot"
+
+.PHONY: bump-version
+bump-version: ## Bump plugin version: make bump-version VERSION=x.y.z
+	@if [ -z "$(VERSION)" ]; then echo "Usage: make bump-version VERSION=x.y.z"; exit 1; fi
+	@jq '.version = "$(VERSION)"' plugin/plugin.json > plugin/plugin.json.tmp && mv plugin/plugin.json.tmp plugin/plugin.json
+	@jq '.version = "$(VERSION)"' plugin/.claude-plugin/plugin.json > plugin/.claude-plugin/plugin.json.tmp && mv plugin/.claude-plugin/plugin.json.tmp plugin/.claude-plugin/plugin.json
+	@echo "Bumped to $(VERSION)"
+	@echo "Next: git add plugin/ && git commit -m 'chore: bump plugin to $(VERSION)' && git tag v$(VERSION) && git push origin main v$(VERSION)"
+
 # --- Help ---
 
 .PHONY: help
