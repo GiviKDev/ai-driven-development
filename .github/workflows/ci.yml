@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -7,35 +8,38 @@ on:
     branches: [main]
 
 jobs:
-  markdown-lint:
-    name: Markdown Lint
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: DavidAnson/markdownlint-cli2-action@v19
+      - uses: actions/setup-node@v4
         with:
-          globs: |
-            docs/**/*.md
-            README.md
-            CONTRIBUTING.md
-            plugin/**/*.md
+          node-version: lts/*
 
-  link-check:
-    name: Link Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+      - name: Markdown lint
+        run: >
+          npx markdownlint-cli2
+          "docs/**/*.md"
+          "README.md"
+          "CONTRIBUTING.md"
+          "plugin/**/*.md"
+          --config .markdownlint.json
 
-      - uses: lycheeverse/lychee-action@v2
-        with:
-          args: >-
-            --no-progress
-            --exclude-mail
-            'docs/**/*.md'
-            'README.md'
-            'CONTRIBUTING.md'
-          fail: true
+      - name: YAML lint
+        run: |
+          pip install yamllint
+          yamllint -c .yamllint.yml .
+
+      - name: Link check
+        run: >
+          npx lychee
+          --no-progress
+          --exclude-mail
+          'docs/**/*.md'
+          'README.md'
+          'CONTRIBUTING.md'
 
   plugin-validate:
     name: Plugin Validation
@@ -92,8 +96,6 @@ jobs:
           failed=0
           for skill in plugin/skills/*/SKILL.md; do
             dir=$(basename "$(dirname "$skill")")
-
-            # Extract YAML frontmatter between --- markers
             frontmatter=$(sed -n '/^---$/,/^---$/p' "$skill" | sed '1d;$d')
 
             for field in name description argument-hint; do
@@ -103,14 +105,12 @@ jobs:
               fi
             done
 
-            # Check skill name matches directory name
             skill_name=$(echo "$frontmatter" | grep '^name:' | sed 's/^name: *//')
             if [ "$skill_name" != "$dir" ]; then
               echo "ERROR: $skill name '$skill_name' does not match directory '$dir'"
               failed=1
             fi
           done
-
           if [ $failed -eq 1 ]; then exit 1; fi
           echo "All skills valid"
 

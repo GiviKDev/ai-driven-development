@@ -18,6 +18,10 @@ update-hooks: ## Update pre-commit hooks to latest versions
 lint: ## Run markdownlint on all docs
 	npx markdownlint-cli2 "docs/**/*.md" "README.md" "CONTRIBUTING.md" "plugin/**/*.md" --config .markdownlint.json
 
+.PHONY: lint-yaml
+lint-yaml: ## Lint YAML files
+	yamllint -c .yamllint.yml .
+
 .PHONY: check-links
 check-links: ## Check for broken links
 	npx lychee --no-progress --exclude-mail "docs/**/*.md" "README.md"
@@ -40,14 +44,6 @@ validate-plugin: ## Validate plugin manifests and skills
 	   echo "ERROR: version mismatch $$copilot vs $$claude"; exit 1; \
 	 fi; \
 	 echo "Manifests in sync: $$copilot"
-
-.PHONY: bump-version
-bump-version: ## Bump plugin version: make bump-version VERSION=x.y.z
-	@if [ -z "$(VERSION)" ]; then echo "Usage: make bump-version VERSION=x.y.z"; exit 1; fi
-	@jq '.version = "$(VERSION)"' plugin/plugin.json > plugin/plugin.json.tmp && mv plugin/plugin.json.tmp plugin/plugin.json
-	@jq '.version = "$(VERSION)"' plugin/.claude-plugin/plugin.json > plugin/.claude-plugin/plugin.json.tmp && mv plugin/.claude-plugin/plugin.json.tmp plugin/.claude-plugin/plugin.json
-	@echo "Bumped to $(VERSION)"
-	@echo "Next: git add plugin/ && git commit -m 'chore: bump plugin to $(VERSION)' && git tag v$(VERSION) && git push origin main v$(VERSION)"
 
 # --- Help ---
 

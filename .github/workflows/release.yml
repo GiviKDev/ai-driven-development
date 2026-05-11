@@ -2,40 +2,43 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
 
 permissions:
   contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
-
-      - name: Extract version from tag
-        id: version
-        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
-
-      - name: Verify plugin versions match tag
-        run: |
-          tag_version="${{ steps.version.outputs.version }}"
-          copilot_version=$(jq -r '.version' plugin/plugin.json)
-          claude_version=$(jq -r '.version' plugin/.claude-plugin/plugin.json)
-
-          if [ "$copilot_version" != "$tag_version" ]; then
-            echo "ERROR: plugin/plugin.json version ($copilot_version) does not match tag ($tag_version)"
-            exit 1
-          fi
-          if [ "$claude_version" != "$tag_version" ]; then
-            echo "ERROR: plugin/.claude-plugin/plugin.json version ($claude_version) does not match tag ($tag_version)"
-            exit 1
-          fi
-          echo "Plugin versions match tag: $tag_version"
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
         with:
-          generate_release_notes: true
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install semantic-release plugins
+        run: >
+          npm install -g
+          semantic-release
+          @semantic-release/commit-analyzer
+          @semantic-release/release-notes-generator
+          @semantic-release/changelog
+          @semantic-release/exec
+          @semantic-release/git
+          @semantic-release/github
+          conventional-changelog-conventionalcommits
+
+      - name: Run semantic-release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
