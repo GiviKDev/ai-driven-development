@@ -3,19 +3,27 @@
 How this methodology relates to established practices
 and adjacent approaches.
 
+This methodology does not replace any of the
+approaches described below. It uses most of them.
+AI by itself cannot handle everything -- it needs
+tools, standards, best practices, and boundaries.
+This methodology adds the layer that existing
+approaches cannot provide: end-to-end journey
+verification with trace analysis by an AI agent.
+
 ## Established Methodologies
 
 ### TDD (Test-Driven Development)
 
 **Relationship**: Complementary, not competing.
 
-TDD: Write a test → write code → refactor. Tests
+TDD: Write a test -- write code -- refactor. Tests
 verify code behavior against expected output.
 
-This methodology: Write a journey → walk the system →
-evaluate against criteria → fix → re-walk. Journeys
-verify system behavior against user intent, through
-traces and criteria.
+This methodology: Write a journey -- walk the system
+-- evaluate against criteria -- fix -- re-walk.
+Journeys verify system behavior against user intent,
+through traces and criteria.
 
 Key differences:
 
@@ -27,6 +35,11 @@ Key differences:
   against existing code.
 - TDD trusts test output. Journeys verify through
   distributed traces.
+
+A project using this methodology should also use
+TDD. Unit tests catch regressions at the code level.
+Journeys catch problems at the system level. Both
+are needed.
 
 Use both. TDD for entity invariants and handler
 logic. Journeys for end-to-end verification and

@@ -140,9 +140,33 @@ The recommended flow:
    with zero repo access to verify the fixes worked
    from the outside.
 
-The black box walk is the honest test. The white box
-analysis is the diagnostic tool. Neither replaces the
-other.
+Black box walks are for honest evaluation. White
+box is the daily workhorse -- the mode developers
+use continuously during development.
+
+## White Box as Daily Workflow
+
+White box is not just for post-walk diagnosis. In
+daily development, white box mode is continuous:
+
+- Change an instruction, re-walk, check if output
+  improves.
+- Fix a performance issue, inspect the trace, verify
+  the query count dropped.
+- Add a feature, check the trace shape matches
+  expectations.
+- Update evaluation criteria, re-evaluate, compare
+  results with the previous run.
+
+The value of white box walks compounds when you
+compare outputs across runs. A walk report from
+before a change, compared against a walk report
+after, reveals whether the change improved or
+regressed quality. This comparison is not yet
+formalized in tooling but is the natural next step.
+
+Black box is for discipline. White box is for
+progress. Neither replaces the other.
 
 ## Bias Prevention
 

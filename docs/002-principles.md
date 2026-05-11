@@ -57,7 +57,7 @@ should be rare.
 
 ## Enforceable Over Advisory
 
-If a rule matters, it must be enforced — not
+If a rule matters, it must be enforced -- not
 suggested.
 
 - **Advisory**: A doc that says "prefer
@@ -75,6 +75,35 @@ suggested.
 Move rules up the enforcement ladder whenever
 possible. Advisory < Instruction < Build rule <
 Runtime check.
+
+## Tooling as Infrastructure
+
+AI agents interact with the system through commands.
+Every raw CLI command is an opportunity for error --
+wrong flags, wrong paths, wrong order of operations.
+Reduce this surface.
+
+- **Makefile as boundary**: Wrap multi-step
+  operations into single make targets:
+  `make format`, `make build`, `make test`,
+  `make pre-commit`. AI runs defined commands, not
+  arbitrary CLI.
+- **Pre-commit hooks as gates**: Quality checks run
+  automatically before every commit. AI cannot skip
+  them.
+- **Auto-approval for safe operations**: Allow AI
+  to run `make test` without confirmation. Require
+  approval for `make deploy` or editing the
+  Makefile itself.
+- **Restrict dangerous edits**: AI should not modify
+  the Makefile, CI config, or hook definitions
+  without explicit permission. These define the
+  safety boundary.
+
+The principle: AI operates inside a well-defined
+toolbox. The developer defines the toolbox. See
+[samples/hooks/](014-samples/hooks/) for a concrete
+example.
 
 ## Verification Over Trust
 

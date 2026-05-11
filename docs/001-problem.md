@@ -69,11 +69,55 @@ changes; the docs do not. AI then follows stale docs
 and produces code that contradicts the system's
 current state.
 
+## AI Is One Tool Among Many
+
+AI does not replace static analyzers, linters,
+formatters, unit tests, integration tests,
+performance tests, architecture tests, or any other
+established quality tool. Those tools exist because
+they solve specific problems deterministically. AI
+cannot do that -- its mistakes are unique each time.
+
+The role of AI in this methodology is as an actor:
+an intelligent agent that can exercise the system,
+follow journeys, read traces, and report findings.
+But it operates within an environment of tools,
+boundaries, and quality gates that humans define
+and maintain.
+
+Without correct tooling, you depend too much on AI.
+With correct tooling, AI becomes a multiplier that
+abstracts parts of the development process while
+the environment catches its mistakes.
+
+## How Developers Evolve with AI
+
+Teams using AI tools go through predictable phases:
+
+1. **Excitement**: AI generates code fast. Output
+   volume jumps. Everything feels productive.
+2. **Over-reliance**: AI handles more decisions.
+   The developer's mental model falls behind the
+   system's actual state.
+3. **Disillusionment**: Bugs appear that tests
+   don't catch. The system's behavior surprises
+   its own developers. "Tests pass" provides
+   false confidence.
+4. **Structured adoption**: The team builds
+   boundaries -- instructions, quality gates,
+   verification practices -- to keep AI productive
+   without sacrificing comprehension.
+
+This methodology maps to phase 4. It helps
+developers set up the correct environment and keep
+their mental model quickly adaptable as the system
+evolves.
+
 ## Why Each Layer Exists
 
 Each layer in this methodology was added because the
 previous layer failed to catch a real problem. The
-layers are not a theoretical framework — they are a
+layers are not a theoretical framework -- they are a
 progression of practical responses to concrete
 failures. See [003-layers.md](003-layers.md) for the
 full narrative.
