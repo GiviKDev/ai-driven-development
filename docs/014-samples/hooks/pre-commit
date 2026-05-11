@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Git pre-commit hook
+#
+# Runs quality gates before every commit. If any
+# gate fails, the commit is rejected.
+#
+# Install:
+#   cp hooks/pre-commit .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+#
+# Or use a hook manager (Husky, lefthook,
+# pre-commit framework) to manage this
+# automatically.
+
+set -e
+
+echo "Running pre-commit checks..."
+echo ""
+
+# Run all quality gates through the Makefile.
+# This is the same command AI agents use.
+make pre-commit
+
+echo ""
+echo "Pre-commit checks passed. Proceeding."
