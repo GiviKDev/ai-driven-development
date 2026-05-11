@@ -102,7 +102,7 @@ Reduce this surface.
 
 The principle: AI operates inside a well-defined
 toolbox. The developer defines the toolbox. See
-[samples/hooks/](014-samples/hooks/) for a concrete
+[samples/hooks/](../samples/hooks/) for a concrete
 example.
 
 ## Verification Over Trust

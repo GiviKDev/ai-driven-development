@@ -27,10 +27,10 @@ directly. No issue needed for small fixes.
 
 ### New samples
 
-The `docs/014-samples/` directory contains
-copy-and-adapt samples. If you have a useful
-instruction file, skill, hook, or journey that others
-could learn from, submit a PR.
+The `samples/` directory contains copy-and-adapt
+samples. If you have a useful instruction file,
+skill, hook, or journey that others could learn
+from, submit a PR.
 
 Requirements for sample PRs:
 

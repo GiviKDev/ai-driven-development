@@ -89,7 +89,7 @@ https://github.com/givikdev/ai-driven-development
 - [Glossary](docs/011-glossary.md) -- Definitions of terms used in the methodology.
 - [Roadmap](docs/012-roadmap.md) -- What is defined, in progress, and planned.
 - [Adoption Guide](docs/013-adoption-guide.md) -- How to start using AI-Driven Development in your project.
-- [Samples](docs/014-samples/) -- Copy-and-adapt samples: instructions, skills, hooks, journeys.
+- [Samples](samples/) -- Copy-and-adapt samples: instructions, skills, hooks, journeys.
 
 ### Specs
 
