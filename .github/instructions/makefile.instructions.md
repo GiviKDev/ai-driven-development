@@ -18,8 +18,8 @@ description: 'Best practices for authoring GNU Make
 ## File Structure
 
 - Define variables at the top before rules
-- Use `.PHONY` to declare targets that do not
-  represent files
+- Use a single `.PHONY` declaration at the end
+  of the file listing all phony targets
 - Group related targets with comment headers
 - Place the `help` target last
 
@@ -28,24 +28,23 @@ description: 'Best practices for authoring GNU Make
 
 # --- Setup ---
 
-.PHONY: setup
 setup: ## Install dependencies
 	pre-commit install
 
 # --- Quality ---
 
-.PHONY: lint
 lint: ## Run linters
 	npx markdownlint-cli2 "docs/**/*.md"
 
 # --- Help ---
 
-.PHONY: help
 help: ## Show available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' \
 	  $(MAKEFILE_LIST) | sort | \
 	  awk 'BEGIN {FS = ":.*?## "}; \
 	  {printf "  %-20s %s\n", $$1, $$2}'
+
+.PHONY: setup lint help
 ```
 
 ## Variables

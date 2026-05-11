@@ -5,7 +5,6 @@ SHELL := /bin/bash
 
 # --- Setup ---
 
-.PHONY: setup
 setup: ## Install pre-commit hooks and run all checks
 	pre-commit install
 	pre-commit install --hook-type commit-msg
@@ -13,24 +12,20 @@ setup: ## Install pre-commit hooks and run all checks
 	@echo ""
 	@echo "Setup complete."
 
-.PHONY: update-hooks
 update-hooks: ## Update pre-commit hooks to latest versions
 	pre-commit autoupdate
 
 # --- Quality ---
 
-.PHONY: pre-commit
 pre-commit: ## Run all pre-commit hooks on all files
 	pre-commit run --all-files
 
-.PHONY: check-links
 check-links: ## Check for broken links (not in pre-commit)
 	lychee --no-progress --exclude-mail \
 		"docs/**/*.md" "README.md" "CONTRIBUTING.md"
 
 # --- Plugin ---
 
-.PHONY: validate-plugin
 validate-plugin: ## Validate plugin manifests and skills
 	@jq empty plugin/plugin.json && echo "plugin.json: valid JSON"
 	@jq empty plugin/.claude-plugin/plugin.json && \
@@ -44,8 +39,9 @@ validate-plugin: ## Validate plugin manifests and skills
 
 # --- Help ---
 
-.PHONY: help
 help: ## Show available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "  %-20s %s\n", $$1, $$2}'
+
+.PHONY: setup update-hooks pre-commit check-links validate-plugin help
