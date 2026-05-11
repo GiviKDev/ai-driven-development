@@ -33,7 +33,7 @@ in a structured format.
 
 ## Output format
 
-```
+```text
 ## Build Report
 
 **Result**: PASS | FAIL

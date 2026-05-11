@@ -7,5 +7,7 @@
   "no-duplicate-heading": { "siblings_only": true },
   "no-inline-html": false,
   "first-line-heading": false,
-  "no-bare-urls": false
+  "no-bare-urls": false,
+  "no-hard-tabs": { "code_blocks": false },
+  "table-column-style": false
 }

@@ -50,7 +50,7 @@ description: "Language-agnostic coding standards.
 
 Run quality gates before committing:
 
-```
+```bash
 make format    # Auto-fix formatting
 make build     # Compile with warnings as errors
 make test      # Run all tests

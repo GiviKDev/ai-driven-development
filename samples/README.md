@@ -22,6 +22,7 @@ AI tool.
   -- Formatting rules for documentation.
 
 **Where they go:**
+
 - VS Code / Copilot:
   `.github/instructions/*.instructions.md`
 - Claude Code: merge into `CLAUDE.md`
@@ -37,6 +38,7 @@ conversations.
   -- Run build commands and report results.
 
 **Where they go:**
+
 - Copilot: `plugin/skills/<name>/SKILL.md`
 - Claude Code:
   `.claude-plugin/skills/<name>/SKILL.md`
@@ -54,6 +56,7 @@ pre-commit hook enforces gates before every commit.
   -- Git hook that runs quality gates.
 
 **Where they go:**
+
 - `Makefile` at project root
 - `pre-commit` at `.git/hooks/pre-commit` (or use
   a hook manager like Husky, lefthook, or
@@ -68,6 +71,7 @@ and expected walk report structure.
   -- A user registers, verifies email, and logs in.
 
 **Where they go:**
+
 - In a `journeys/` directory at project root, or
   wherever your project keeps verification
   artifacts.

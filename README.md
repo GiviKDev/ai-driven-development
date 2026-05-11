@@ -51,12 +51,14 @@ AI-assisted verification.
 ### Install
 
 **VS Code / Copilot**: Run `Chat: Install Plugin From Source` and enter:
-```
+
+```text
 https://github.com/givikdev/ai-driven-development
 ```
 
 **Claude Code**:
-```
+
+```text
 /plugin install ai-driven-development
 ```
 

@@ -18,6 +18,7 @@ would, through the callable surface, producing
 observable traces.
 
 A good journey:
+
 - Follows a real user intent (not a technical edge
   case).
 - Uses the callable surface (MCP tools, REST API,

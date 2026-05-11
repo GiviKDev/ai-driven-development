@@ -66,14 +66,17 @@ automatically loaded when AI works with specific
 file types.
 
 For VS Code / Copilot:
+
 - `.github/copilot-instructions.md` — always loaded
 - `.github/instructions/*.instructions.md` — loaded
   by `applyTo` glob pattern
 
 For Claude Code:
+
 - `CLAUDE.md` at the project root
 
 For Cursor:
+
 - `.cursorrules` at the project root
 
 **Done when**: AI-generated code follows your project
@@ -86,12 +89,14 @@ to journey walking and evaluation skills:
 
 **Copilot (VS Code)**:
 Run `Chat: Install Plugin From Source` and enter:
-```
+
+```text
 https://github.com/givikdev/ai-driven-development
 ```
 
 **Claude Code**:
-```
+
+```text
 /plugin install ai-driven-development@<marketplace>
 ```
 

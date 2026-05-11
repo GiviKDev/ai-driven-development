@@ -23,7 +23,7 @@ non-deterministic and varies across models.
 
 With this tool, the flow becomes:
 
-```
+```text
 1. AI calls a product tool (e.g., create org)
 2. AI calls trace-analyzer.analyze({ traceId })
 3. Tool returns: { dbQueryCount: 14, erroredSpans: 1, ... }
@@ -35,7 +35,7 @@ The AI does not interpret traces. It compares numbers.
 
 ## Architecture
 
-```
+```text
 MCP Client (VS Code, Claude, etc.)
     │
     │  stdio or Streamable HTTP
@@ -119,14 +119,14 @@ available, simple REST API, language-agnostic.
 Support Option A (Aspire) as a secondary target for
 .NET users. Configuration via environment variable:
 
-```
+```bash
 TRACE_BACKEND=jaeger
 TRACE_BACKEND_URL=http://localhost:16686
 ```
 
 or
 
-```
+```bash
 TRACE_BACKEND=aspire
 TRACE_BACKEND_URL=http://localhost:18889
 ```
@@ -314,7 +314,7 @@ limitation.
 
 ## Configuration
 
-```
+```bash
 TRACE_BACKEND=jaeger|aspire|tempo
 TRACE_BACKEND_URL=http://localhost:16686
 DEFAULT_DB_QUERY_BUDGET=5

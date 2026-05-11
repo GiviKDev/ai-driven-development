@@ -77,6 +77,7 @@ Produce a walk report with this structure:
 ### Phase 4: Fix and re-walk
 
 If findings exist:
+
 1. Report findings to the user.
 2. Wait for fixes.
 3. Re-walk only the failed steps unless the user

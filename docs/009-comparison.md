@@ -57,8 +57,8 @@ the user's perspective" but diverges in execution:
 
 - BDD acceptance tests are automated scripts. Walk
   reports are AI-evaluated against human criteria.
-- BDD uses a test runner. This uses callable surface
-  + traces + criteria.
+- BDD uses a test runner. This uses callable
+  surface, traces, and criteria.
 - BDD behaviors are Gherkin features. Journey steps
   are natural-language descriptions.
 

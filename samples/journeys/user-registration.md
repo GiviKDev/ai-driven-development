@@ -135,7 +135,7 @@ profile with `name: "Test User"` and
 This is what a completed walk report looks like
 after the journey-walker agent executes the journey.
 
-```
+```text
 ## Walk Report: User Registration
 
 **Journey**: User Registration
