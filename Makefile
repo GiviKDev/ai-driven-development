@@ -25,7 +25,7 @@ pre-commit: ## Run all pre-commit hooks on all files
 
 .PHONY: check-links
 check-links: ## Check for broken links (not in pre-commit)
-	npx lychee --no-progress --exclude-mail \
+	lychee --no-progress --exclude-mail \
 		"docs/**/*.md" "README.md" "CONTRIBUTING.md"
 
 # --- Plugin ---
