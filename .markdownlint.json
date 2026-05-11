@@ -1,0 +1,11 @@
+{
+  "line-length": { "line_length": 500 },
+  "no-trailing-spaces": true,
+  "no-multiple-blanks": true,
+  "single-h1": true,
+  "no-emphasis-as-heading": false,
+  "no-duplicate-heading": { "siblings_only": true },
+  "no-inline-html": false,
+  "first-line-heading": false,
+  "no-bare-urls": false
+}
