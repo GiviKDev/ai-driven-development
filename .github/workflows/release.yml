@@ -22,11 +22,29 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Check for plugin changes
+        id: check
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            RANGE="HEAD"
+          else
+            RANGE="${LAST_TAG}..HEAD"
+          fi
+          if git diff --name-only "$RANGE" -- | grep -q "^plugin/"; then
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No plugin changes since ${LAST_TAG:-initial}"
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-node@v6
+        if: steps.check.outputs.release == 'true'
         with:
           node-version: lts/*
 
       - name: Install semantic-release plugins
+        if: steps.check.outputs.release == 'true'
         run: >
           npm install -g
           semantic-release
@@ -39,6 +57,7 @@ jobs:
           conventional-changelog-conventionalcommits
 
       - name: Run semantic-release
+        if: steps.check.outputs.release == 'true'
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
