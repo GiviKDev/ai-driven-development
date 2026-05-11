@@ -1,0 +1,88 @@
+# Contributing
+
+Thank you for your interest in AI-Driven Development.
+This project is a methodology and a plugin -- not a
+code library. Contributions are primarily prose,
+skill definitions, and feedback.
+
+## What we accept
+
+### Methodology feedback
+
+The most valuable contribution is critical feedback
+on the methodology itself:
+
+- Does a concept not make sense? Open an issue.
+- Is a recommendation wrong? Open an issue with your
+  counter-argument.
+- Is something missing? Open an issue describing the
+  gap.
+
+Use the "Methodology Feedback" issue template.
+
+### Documentation fixes
+
+Typos, broken links, unclear wording -- submit a PR
+directly. No issue needed for small fixes.
+
+### New samples
+
+The `docs/014-samples/` directory contains
+copy-and-adapt samples. If you have a useful
+instruction file, skill, hook, or journey that others
+could learn from, submit a PR.
+
+Requirements for sample PRs:
+
+- The sample must be generic (not tied to a specific
+  proprietary project)
+- Include comments explaining why each rule exists
+- Follow the existing format in the samples directory
+
+### Plugin improvements
+
+Skills and agent definitions in `plugin/` can be
+improved. If you find a skill that produces poor
+results, submit a PR with the improvement and explain
+what was wrong and why the change is better.
+
+### Comparisons
+
+The comparison doc (`docs/009-comparison.md`) covers
+TDD, BDD, SDD, vibe coding, and adjacent approaches.
+If you know of a methodology or approach that should
+be compared, open an issue or submit a PR.
+
+## What we do not accept
+
+- Marketing language, filler, or vague
+  recommendations
+- Changes that contradict the principles in
+  `docs/002-principles.md` without strong
+  justification
+- Features or code that belong in a separate
+  implementation repository
+
+## How to submit a PR
+
+1. Fork the repository
+2. Create a branch from `main`
+3. Make your changes
+4. Ensure your changes follow the writing rules in
+   `.github/instructions/docs.instructions.md`
+5. Submit a PR with a clear description of what
+   changed and why
+
+## Writing style
+
+- Plain language. No marketing copy.
+- Be opinionated. Take a position.
+- No em dashes. Use " -- " or rephrase.
+- Wrap lines at 50-60 characters.
+- See `docs/002-principles.md` for the full set of
+  design principles.
+
+## License
+
+By contributing, you agree that your contributions
+will be licensed under [CC BY 4.0](LICENSE).
