@@ -8,15 +8,17 @@ development. Six layers, adopted incrementally,
 each addressing a gap the previous layer cannot
 fill.
 
-Also referred to as MCP-Driven Development when
-the callable surface is an MCP server -- but MCP
-is not a requirement. The methodology works with
-any callable interface (REST, gRPC, CLI).
-
 This is not a framework or a library. It is a way
 of working -- a set of practices that help
 developers and AI agents build, verify, and evolve
 software together.
+
+> **Early development.** The methodology
+> specification is complete for its initial scope.
+> Tooling, automation, and real-world validation
+> are still in progress. See the
+> [Roadmap](docs/012-roadmap.md) and
+> [Open Problems](docs/010-open-problems.md).
 
 ## Who This Is For
 
@@ -31,7 +33,7 @@ software together.
 
 | Layer | What | Gap it fills |
 |-------|------|-------------|
-| 0 | Code | -- |
+| 0 | Code | The foundation |
 | 1 | Observability | "I can't see what happens inside" |
 | 2 | Documentation | "Nobody knows the philosophy" |
 | 3 | AI Instructions | "AI doesn't follow conventions even with docs" |

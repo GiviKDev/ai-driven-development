@@ -3,6 +3,11 @@
 What is defined, what is in progress, and what is
 planned.
 
+This methodology is in early development. The
+specification is complete for its initial scope,
+but tooling, automation, and real-world validation
+are still in progress.
+
 ## Defined
 
 The methodology specification is complete for its
@@ -35,13 +40,13 @@ Cross-tool plugin (Copilot + Claude Code) with:
 
 - [x] Glossary
 - [x] Roadmap
-- [ ] Adoption guide
+- [x] Adoption guide
 - [ ] Sample journey with walk report
-- [ ] Vibe coding comparison section
+- [x] Vibe coding comparison section
 
 ### Dogfooding
 
-- [ ] .instructions.md files for this repo
+- [x] .instructions.md files for this repo
 - [ ] Verify plugin works with Copilot agent mode
 - [ ] Verify plugin works with Claude Code
 
