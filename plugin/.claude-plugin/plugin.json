@@ -1,0 +1,19 @@
+{
+  "name": "ai-driven-development",
+  "description": "Skills, agents, and tools for the AI-Driven Development methodology. Walk journeys, evaluate criteria, analyze traces, and verify system quality through AI-assisted verification.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Givi Kesanashvili"
+  },
+  "homepage": "https://github.com/givikdev/ai-driven-development",
+  "repository": "https://github.com/givikdev/ai-driven-development",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "ai-driven-development",
+    "quality",
+    "verification",
+    "journeys",
+    "traces",
+    "observability"
+  ]
+}
