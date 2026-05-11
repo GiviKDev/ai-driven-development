@@ -1,1 +1,12 @@
-# No ignored files currently
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Node (used by pre-commit, lychee, markdownlint)
+node_modules/
+package-lock.json

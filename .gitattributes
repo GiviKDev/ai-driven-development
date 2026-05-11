@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.md text=auto diff=markdown
+*.yml text=auto
+*.yaml text=auto
+*.json text=auto
