@@ -4,11 +4,12 @@ The system is running. What happens next.
 
 ## The problem
 
-A delivered system that nobody watches is a system
-that fails silently until users complain. AI
-involvement does not reduce operational
-responsibility — it shifts the burden from writing
-code to monitoring code that was written quickly.
+A delivered system that nobody watches fails
+silently until users complain. AI-assisted
+development amplifies this: features ship faster,
+deployment frequency increases, and the surface
+area for operational failures grows at a rate
+that manual vigilance cannot match.
 
 Without operational discipline:
 
@@ -18,6 +19,9 @@ Without operational discipline:
 - The same problem recurs because nobody captured
   what fixed it last time.
 - Performance regressions accumulate unnoticed.
+- AI-generated code that passed all tests
+  degrades under production load in ways
+  development-time verification did not cover.
 
 ## Approaches
 
@@ -86,6 +90,27 @@ after.
 
 Cloud costs grow silently. Monitor and review
 regularly.
+
+### What AI changes about operations
+
+Development-time trace verification
+([009-observability.md](009-observability.md))
+and production monitoring observe the same system
+from different angles. Connect them:
+
+- Healthy trace patterns defined during development
+  become production monitoring baselines. If a
+  handler that should make 2 DB queries starts
+  making 10, that is an alert.
+- AI ships features faster, so deployment
+  frequency increases. Reversible deployments
+  (012) and automated rollback become more
+  important, not less.
+- AI-generated code may handle the happy path
+  correctly but fail under load, concurrency, or
+  edge cases that development-time testing did
+  not cover. Production observability is the
+  safety net.
 
 ## When this matters
 

@@ -18,8 +18,7 @@ on the practices themselves:
 - Is something missing? Open an issue describing the
   gap.
 
-Use the "Methodology Feedback" issue template (it
-applies equally to practice feedback).
+Use the "Practice Feedback" issue template.
 
 ### Documentation fixes
 

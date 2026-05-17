@@ -31,6 +31,17 @@ the current best answer; it does not scale.
 
 ## Quality and verification
 
+### Black-box walk bias prevention
+
+The black-box walk procedure requires a separate
+IDE instance and cleared AI memory to prevent
+bias. This is purely advisory -- nothing enforces
+it. Per the enforcement ladder
+(002-principles.md), an important rule that
+depends on user discipline is at the weakest
+level. No automated enforcement mechanism exists
+for session isolation.
+
 ### Automated regression for journey verification
 
 A journey that passes today may break tomorrow. No

@@ -1,155 +1,122 @@
 # Quality
 
-How to trust what is delivered. Tests, verification,
-trace analysis, and the other mechanisms that turn
-"the build is green" into "the system works."
+How to trust what is delivered. The build is green
+does not mean the system works.
 
 ## The problem
 
 Code that compiles is not code that works. Tools
 catch syntactic problems and known anti-patterns
-but cannot tell you:
+but cannot tell you whether the system behaves
+correctly end to end, handles failure modes, or
+meets performance expectations.
 
-- Whether the system behaves correctly end to end.
-- Whether the system handles failure modes.
-- Whether new code broke something subtle elsewhere.
-- Whether the system meets performance and
-  reliability expectations.
-
-AI makes this worse, not better. AI generates code
-that looks correct, with tests that pass, in
-scenarios it was shown — while quietly missing
-edge cases, mishandling errors, or producing
-plausible but wrong results in scenarios it was not
-shown.
+AI makes this worse. AI generates code that looks
+correct, with tests that pass, in scenarios it was
+shown -- while quietly missing edge cases or
+producing plausible but wrong results in scenarios
+it was not shown.
 
 Trust must be earned by evidence, not assumed from
 the absence of red.
 
 ## Approaches
 
-Multiple, complementary. Pick the ones that match
-the risks in your project.
+### The baseline: tests
 
-### Unit tests
+Every project needs tests. The question is which
+kinds and how many.
 
-Cover individual functions and classes. Fast, easy
-to write, easy to maintain. Necessary but not
-sufficient: passing unit tests do not prove the
-system works.
+- **Unit tests**: Cover individual functions and
+  classes. Fast, easy to write. Necessary but not
+  sufficient -- passing unit tests do not prove the
+  system works. Drives design when written first
+  (TDD).
+- **Integration tests**: Exercise multiple
+  components against real dependencies (databases,
+  queues, APIs). Slower, catch problems unit tests
+  cannot.
+- **End-to-end tests**: Drive the system from its
+  external surface. Catch the most kinds of
+  problems. Brittle if written poorly.
 
-Drives design when written first (TDD). Useful
-documentation of intended behavior.
+The default recommendation: start with unit and
+integration tests. Add end-to-end tests for
+critical user flows.
 
-### Integration tests
+### Beyond tests: trace-based verification
 
-Exercise multiple components together against real
-dependencies (databases, queues, APIs). Slower than
-unit tests, catch problems unit tests cannot.
+Tests assert expected outputs. They do not verify
+what happened internally. A test that checks
+"status 201" does not catch five redundant DB
+queries or a silently failed async consumer.
 
-### End-to-end / acceptance tests
+Trace-based verification fills this gap: inspect
+the execution trace after every meaningful
+operation. See
+[009-observability.md](009-observability.md) for
+the practice and
+[../methods/trace-analyzer/](../methods/trace-analyzer/)
+for the tool specification.
 
-Drive the system from its external surface as a
-user would. Catch the most kinds of problems. Slow,
-brittle if written poorly.
+### Beyond tests: journey verification
 
-BDD-style frameworks (Cucumber, SpecFlow) make
-these tests double as documentation.
+A structured method for walking a running system
+through defined user flows on its callable
+surface and evaluating each step against binary
+criteria. Combines black-box behavior checks with
+white-box trace evidence.
 
-### Journey verification
+This is a method defined in this practice system,
+not an industry-standard technique. It addresses a
+specific gap: when AI generates significant
+portions of the code, an external check -- walking
+the system as a user would, then inspecting the
+trace -- catches problems that tests miss.
 
-A structured way of walking the system through a
-defined sequence of operations on the callable
-surface and checking each step against binary
-criteria. Combines black-box behavior with white-box
-runtime evidence (traces, logs, metrics).
+See
+[../methods/journey-verification/](../methods/journey-verification/)
+for the full specification.
 
-Useful when:
+### Complementary mechanisms
 
-- The system has clear user-facing flows.
-- Runtime evidence (traces, side effects) matters as
-  much as return values.
-- AI is generating significant portions of the
-  code, and you need an external check on what was
-  produced.
+Use when the project's risk profile justifies
+them:
 
-See [../methods/journey-verification/](../methods/journey-verification/) for the full
-specification.
+- **Property-based testing**: Generate many inputs
+  and check invariants. Catches edge cases humans
+  and AI do not think of (QuickCheck, Hypothesis,
+  FsCheck).
+- **Mutation testing**: Deliberately break code and
+  check that tests catch it. Measures test quality.
+  Run periodically, not every commit.
+- **Contract testing**: Verify that producers and
+  consumers agree on interfaces. Essential in
+  distributed systems.
+- **Manual exploratory testing**: Humans looking
+  for what automated checks miss. Focus on the
+  riskiest areas.
 
-### Trace analysis
+### Choosing what to use
 
-Examine OpenTelemetry traces (or equivalent) to
-verify what actually happened at runtime. Catches
-problems test assertions miss:
-
-- A call that should not have happened.
-- A retry storm that masks an upstream failure.
-- An expected side effect that silently did not
-  occur.
-
-Useful when behavior is distributed across services
-or when the cost of a missed failure is high.
-
-### Property-based testing
-
-Generate many inputs and check invariants. Catches
-edge cases humans (and AI) do not think of.
-Examples: QuickCheck, Hypothesis, FsCheck.
-
-### Mutation testing
-
-Deliberately break the code and check that tests
-catch it. Measures test quality, not just coverage.
-Slow; run periodically, not on every commit.
-
-### Contract testing
-
-Verify that producers and consumers agree on
-interfaces. Useful in distributed systems where
-end-to-end tests are expensive.
-
-### Manual exploratory testing
-
-Humans poking at the system, looking for what
-automated checks miss. Cannot be replaced
-entirely; can be focused on the riskiest areas.
-
-## Choosing what to use
-
-The right mix depends on:
-
-- **Risk**: high-risk areas justify more
+- Every project: unit tests + integration tests.
+- User-facing flows: end-to-end tests or journey
   verification.
-- **Surface stability**: stable surfaces are worth
-  contract or journey verification; volatile
-  surfaces churn the tests.
-- **AI involvement**: heavy AI generation increases
-  the case for external verification — journey
-  verification, trace analysis, property-based
-  testing.
-- **Team size**: distributed teams need contract
-  testing more than co-located teams.
-
-A small project can ship with unit and integration
-tests alone. A regulated system needs the full
-stack.
+- Heavy AI involvement: journey verification +
+  trace analysis. AI-generated code needs external
+  verification.
+- Distributed systems: contract testing.
+- High-risk domains: property-based testing +
+  mutation testing.
 
 ## When this matters
 
 From the start. Quality mechanisms added late
-require retrofitting and the team learns that
+require retrofitting, and the team learns that
 quality is optional.
 
 ## What comes next
 
 Quality mechanisms only work when they run
-consistently — on every commit, every PR, every
-release. See [011-automation.md](011-automation.md).
-
-## Note on terminology
-
-"Verification" is often used as a category name.
-This document treats it as one kind of quality
-mechanism among many, not as the master category.
-The master category is quality: anything that
-gives you justified confidence in the system.
+consistently. See
+[011-automation.md](011-automation.md).

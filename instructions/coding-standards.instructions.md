@@ -56,8 +56,9 @@ make build     # Compile with warnings as errors
 make test      # Run all tests
 ```
 
-See the repository's [Makefile](../Makefile) for
-the gate definitions.
+Define gate targets in a project-level Makefile.
+See [008-tools](../docs/practices/008-tools.md)
+for the approach.
 
 ## AI-specific rules
 

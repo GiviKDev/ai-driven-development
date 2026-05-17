@@ -42,8 +42,9 @@ that covers it.
 
 ### Foundation
 
-- [001-problem.md](practices/001-problem.md) — what
-  this repository is and why it exists.
+- [001-problem.md](practices/001-problem.md) — the
+  acceleration gap and why this practice system
+  exists.
 - [002-principles.md](practices/002-principles.md)
   — principles guiding documentation, instructions,
   and verification.
@@ -106,8 +107,11 @@ Detailed specifications for specific quality methods
 referenced from the practices.
 
 - [methods/journey-verification/](methods/journey-verification/)
-  — walking a system through defined user journeys
+  -- walking a system through defined user journeys
   on the callable surface and evaluating each step
   against binary criteria.
 - [methods/trace-analyzer/](methods/trace-analyzer/)
-  — analyzing distributed traces against budgets.
+  -- analyzing distributed traces against budgets.
+- [methods/observability-signals/](methods/observability-signals/)
+  -- reference tables for trace, log, and metric
+  findings during development-time verification.

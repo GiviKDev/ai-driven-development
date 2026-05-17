@@ -17,8 +17,9 @@ plugins — not a framework or library.
 
 - Not a framework, library, or installable package
 - Not tied to any specific language, platform, or protocol
-- Not a single methodology — it is a set of practices addressing distinct
-  problems across a project's lifecycle
+- Not a single methodology — it is a set of
+  practices addressing distinct problems across
+  a project's lifecycle
 
 ## How to work with this repo
 

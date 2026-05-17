@@ -36,6 +36,17 @@ validate-plugin: ## Validate plugin manifests and skills
 	   echo "ERROR: version mismatch $$copilot vs $$claude"; exit 1; \
 	 fi; \
 	 echo "Manifests in sync: $$copilot"
+	@for skill in plugins/journey-verification/skills/*/SKILL.md; do \
+	   dir=$$(basename $$(dirname "$$skill")); \
+	   if ! head -5 "$$skill" | grep -q '^---$$'; then \
+	     echo "ERROR: $$skill missing YAML frontmatter"; exit 1; \
+	   fi; \
+	   name=$$(awk '/^---$$/{n++; next} n==1 && /^name:/{sub(/^name: */, ""); gsub(/["'"'"']/, ""); print; exit}' "$$skill"); \
+	   if [ "$$name" != "$$dir" ]; then \
+	     echo "ERROR: $$skill name '$$name' != directory '$$dir'"; exit 1; \
+	   fi; \
+	   echo "$$skill: valid (name=$$name)"; \
+	 done
 
 # --- Help ---
 

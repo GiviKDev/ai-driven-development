@@ -89,3 +89,28 @@ proceeds (commit, push, merge, release). See
 A short document capturing why a non-obvious
 choice was made. Written when the decision is
 fresh.
+
+## Practice System
+
+A set of documented problems, approaches, methods,
+and tools organized by project lifecycle. Not a
+framework or library -- a system of practices that
+evolves with the projects it supports.
+
+## Enforcement Ladder
+
+The progression of rule enforcement strength:
+advisory (doc says "prefer X") < instruction
+(AI loads rule automatically) < linter/build rule
+(violation fails the build) < runtime check
+(system rejects invalid state). Move rules up the
+ladder whenever possible. See
+[002-principles.md](002-principles.md).
+
+## Budget
+
+A numeric threshold for a trace metric (e.g.,
+DB queries <= 5, response time < 500ms). Used in
+trace analysis and evaluation criteria to make
+quality checks binary: the metric is within
+budget or it violates.

@@ -1,143 +1,89 @@
 # Observability
 
-What to observe, when, and what constitutes a
-finding.
+What to observe, when, and why. Not production
+monitoring -- development-time verification.
 
-## Purpose
+## The problem
 
-Observability in this practice is not production
-monitoring. It is development-time verification.
-Traces, logs, and metrics are the evidence used to
-evaluate whether the system behaves correctly — not
-just whether it returns the right response.
+Code that compiles is not code that works. A
+successful HTTP response does not mean the
+internals are correct. AI generates code that
+returns the right shape while quietly issuing
+redundant queries, swallowing exceptions, or
+failing async consumers.
 
-## Three Signals
+Without observability during development:
 
-### Traces
+- A handler loads the same entity three times and
+  nobody notices until production load reveals it.
+- An async consumer fails silently because its
+  dependency registration is missing. The request
+  returned 200.
+- An event is published with no subscribers. The
+  feature appears to work but the side effect
+  never happens.
 
-Distributed traces show the full execution path of a
-request: every span, every DB query, every message
-handler, every external call.
+Tests do not catch these. Only inspecting the
+execution trace reveals them.
 
-**When to inspect**: After every meaningful
-invocation of a callable surface — manual smoke
-check, automated test run, or a method like a
-journey walk. Inspect every step, not a sampled
-subset.
+## Approaches
 
-**What to look for**:
+### Traces as primary evidence
 
-| Signal | Finding |
-|---|---|
-| Same entity loaded 2+ times in one trace | Redundant query. Handler or consumer re-fetches what is already in scope. |
-| `status: "Error"` on a child span when the root span succeeded | Broken async consumer. The request returned 200 but a downstream handler failed. |
-| Dependency resolution failure (e.g., `UnResolvableVariableException`) | Missing DI registration. The handler cannot be constructed. |
-| 10+ DB spans for a simple operation | Over-querying. Likely N+1 or missing eager load. |
-| External HTTP call > 2 seconds | Latency risk. External dependency is slow. |
-| Event published with zero consumer spans | Published event with no handler. Either the handler is missing or the subscription is wrong. |
-| Same DB table queried by multiple spans with different filters | Possible consolidation opportunity. |
+Distributed traces show the full execution path:
+every span, every DB query, every message handler,
+every external call. Inspect traces after every
+meaningful invocation -- manual smoke check, test
+run, or journey walk.
 
-### Logs
+For what constitutes a finding in a trace, see
+[../methods/observability-signals/](../methods/observability-signals/).
 
-Structured logs with trace context show what happened
-at each point in the execution path. Logs supplement
-traces — they provide detail that spans alone don't
-carry.
+### Logs supplement traces
 
-**When to inspect**: When a trace shows an error span
-or unexpected behavior. Not for every step — only
-when the trace raises a question.
+Structured logs with trace context provide detail
+that spans alone do not carry. Inspect logs when a
+trace shows an error or unexpected behavior -- not
+for every operation.
 
-**What to look for**:
+### Metrics detect regressions
 
-| Signal | Finding |
-|---|---|
-| Exception logged with stack trace on a non-error span | Swallowed exception. The handler caught and logged but did not propagate. |
-| Validation failure logged but not returned to caller | Silent validation. The client gets 200 but the input was partially invalid. |
-| Log entry without trace context | Missing correlation. This log cannot be linked to the request that caused it. |
+Request counts, error rates, latency distributions.
+Compare before and after a change to detect
+regressions. Useful after a verification pass
+completes.
 
-### Metrics
+### Development dashboard
 
-Request counts, error rates, latency distributions,
-message queue depths.
+Use a trace visualization dashboard during
+development. Without it, traces are invisible.
 
-**When to inspect**: After a verification pass
-completes (test run, journey walk, load run).
-Compare aggregate metrics before and after a change
-to detect regressions.
+Options: .NET Aspire dashboard (built-in, no
+setup), Jaeger UI (standalone, language-agnostic),
+Grafana + Tempo (production-grade, complex setup),
+or any OTel-compatible tool.
 
-**What to look for**: Latency distribution shifts,
-error rate changes, queue depth increases after batch
-operations.
+The dashboard must be accessible to both the
+developer (manual inspection) and AI tools (via
+MCP or API) for automated trace analysis.
 
-## Healthy Trace Patterns
-
-For different operation types, define what a healthy
-trace should look like:
-
-### Simple read (list, get by ID)
-
-- 1-3 DB queries (authorization check + data fetch).
-- No message publications.
-- < 100ms total duration.
-
-### Simple mutation (create, update)
-
-- 1-3 DB queries (authorization + read + write).
-- 0-2 event publications.
-- All consumer spans succeed if events are published.
-- < 200ms total duration (excluding external calls).
-
-### Batch operation (publish N items)
-
-- DB queries proportional to item count, not N+1.
-- 1 batch event publication (fat event), not N
-  individual events.
-- Consumer spans complete without error.
-- Duration scales linearly with item count.
-
-### Cross-module operation (involves external service)
-
-- External HTTP span clearly visible.
-- Retry spans visible if the external call failed and
-  was retried.
-- Compensation span visible if the operation failed
-  after a partial external change.
-- Total duration dominated by external call, not
-  internal processing.
-
-## Trace Analysis Tool
+### Trace analysis tool
 
 Manual trace inspection does not scale. A dedicated
-trace analysis tool (MCP server) should:
-
-1. Accept a trace ID.
-2. Extract structured metrics: span count, DB query
-   count, errored spans, duplicate entity loads,
-   external call durations, consumer success/failure.
-3. Compare metrics against budgets defined by the
-   caller (criteria belong to whichever method
-   invokes the tool).
-4. Return structured violations (not scores, not
-   judgments — binary violations with evidence).
-
-See
+tool should accept a trace ID, extract structured
+metrics, and compare against budgets. See
 [../methods/trace-analyzer/README.md](../methods/trace-analyzer/README.md)
 for the specification.
 
-## Development Dashboard
+## When this matters
 
-Use a trace visualization dashboard during
-development. This is not optional — without it,
-traces are invisible.
+From the first endpoint or handler. Observability
+added later requires retrofitting instrumentation
+across existing code.
 
-Options:
+## What comes next
 
-- .NET Aspire dashboard (built-in, no setup).
-- Jaeger UI (standalone, language-agnostic).
-- Grafana + Tempo (production-grade, complex setup).
-- Any OTel-compatible visualization tool.
-
-The dashboard must be accessible to both the developer
-(for manual inspection) and to AI tools (via MCP or
-API) for automated trace analysis during verification.
+Observability provides evidence. The next problem
+is using that evidence -- along with tests and
+other mechanisms -- to trust what is delivered.
+See [010-quality.md](010-quality.md).

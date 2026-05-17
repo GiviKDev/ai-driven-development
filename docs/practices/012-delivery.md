@@ -65,11 +65,6 @@ Where users get the artifact: package registries
 stores, plugin marketplaces. Each has its own
 process and constraints.
 
-For this repository, distribution is the Copilot
-plugin spec and the Claude Code plugin spec —
-declarative artifacts loaded by tools that already
-exist.
-
 ### Release cadence
 
 Continuous (every merge ships) vs scheduled
