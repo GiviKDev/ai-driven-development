@@ -1,0 +1,10 @@
+{
+  "name": "journey-verification",
+  "description": "Skills and agents for trace-backed journey verification: design journeys, walk callable surfaces, evaluate binary criteria, and analyze traces.",
+  "version": "0.1.1",
+  "author": {
+    "name": "Givi Kesanashvili"
+  },
+  "skills": "skills/",
+  "agents": "agents/"
+}

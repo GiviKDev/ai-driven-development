@@ -1,6 +1,6 @@
 ---
 name: journey-walker
-description: "A specialized agent for walking journeys and verifying system quality. Use this agent when performing end-to-end verification of a system using the AI-Driven Development methodology."
+description: "A specialized agent for walking journeys and verifying system quality. Use this agent when performing end-to-end verification of a system through trace-backed journey walks."
 tools:
   - run_in_terminal
   - read_file
