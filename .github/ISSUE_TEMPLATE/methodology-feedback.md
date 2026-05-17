@@ -7,7 +7,7 @@ labels: methodology
 
 ## Which document?
 
-<!-- Link to the doc file, e.g. docs/003-layers.md -->
+<!-- Link to the doc file, e.g. docs/practices/010-quality.md -->
 
 ## What is the feedback?
 

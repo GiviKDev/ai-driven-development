@@ -56,7 +56,7 @@ make build     # Compile with warnings as errors
 make test      # Run all tests
 ```
 
-See the [Makefile sample](../hooks/Makefile) for
+See the repository's [Makefile](../Makefile) for
 the gate definitions.
 
 ## AI-specific rules

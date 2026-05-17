@@ -21,8 +21,9 @@ applyTo: "docs/**/*.md"
 - No filler phrases: "it should be noted that",
   "it is important to", "in order to"
 - No em dashes. Use " -- " or rephrase
-- Use "this methodology" to self-reference, not
-  "AI-Driven Development" repeatedly
+- Use "this repository" or be specific (e.g.,
+  "this document", "this practice") rather than
+  repeating "AI-Driven Development"
 
 ## Content Rules
 

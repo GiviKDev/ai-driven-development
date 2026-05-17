@@ -3,125 +3,91 @@
 [![CI](https://github.com/GiviKDev/ai-driven-development/actions/workflows/ci.yml/badge.svg)](https://github.com/GiviKDev/ai-driven-development/actions/workflows/ci.yml)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-A quality methodology for AI-assisted software
-development. Six layers, adopted incrementally,
-each addressing a gap the previous layer cannot
-fill.
+A practice system for building software with AI as a
+working partner. The repository is a personal,
+opinionated record of what works — refined through
+real projects, feedback, and the changing landscape
+of AI tooling.
 
-This is not a framework or a library. It is a way
-of working -- a set of practices that help
-developers and AI agents build, verify, and evolve
-software together.
+It is not a framework. It is not a library. It is a
+set of documents, instruction samples, and plugins
+that describe practices and provide artifacts to
+adopt them.
 
-> **Early development.** The methodology
-> specification is complete for its initial scope.
-> Tooling, automation, and real-world validation
-> are still in progress. See the
-> [Roadmap](docs/012-roadmap.md) and
-> [Open Problems](docs/010-open-problems.md).
+> **Early development.** Foundational documents are
+> written; tooling and validation continue. See the
+> [Roadmap](docs/practices/017-roadmap.md) and
+> [Open Problems](docs/practices/016-open-problems.md).
 
-## Who This Is For
+## Who this is for
 
-- Solo developers using AI who can't keep up with
-  their own system's complexity.
+- Solo developers using AI who want a structure to
+  keep up with their own systems.
 - Small teams where AI-generated code volume
   exceeds human review bandwidth.
-- Any team where "tests pass" has become a form
-  of false confidence.
+- Anyone who wants to systemize how they move from
+  problem to delivered software with AI in the
+  loop.
 
-## The Layers
+## Quick start
 
-| Layer | What | Gap it fills |
-|-------|------|-------------|
-| 0 | Code | The foundation |
-| 1 | Observability | "I can't see what happens inside" |
-| 2 | Documentation | "Nobody knows the philosophy" |
-| 3 | AI Instructions | "AI doesn't follow conventions even with docs" |
-| 4 | Callable Surface | "Nobody verifies the system works e2e" |
-| 5 | Journey Verification | "Nobody checks quality from the user's perspective" |
+1. Read [docs/practices/001-problem.md](docs/practices/001-problem.md)
+   to understand what this is and why.
+2. Read [docs/practices/002-principles.md](docs/practices/002-principles.md)
+   for the principles that guide everything else.
+3. Browse [docs/README.md](docs/README.md) to find
+   the document that addresses the problem in front
+   of you.
 
-Each layer is earned by the failure of the previous
-one. Adopt them in order.
+The numbering in `docs/practices/` follows the order
+things typically appear in a project's life. The
+order you read them is determined by your current
+problem.
 
-## Quick Start
+## Repository layout
 
-1. Read [The Problem](docs/001-problem.md) to
-   understand why.
-2. Read [Principles](docs/002-principles.md) for
-   the design philosophy.
-3. Read [Layer by Layer](docs/003-layers.md) for
-   the full narrative.
-4. Read [Adoption Guide](docs/013-adoption-guide.md)
-   to start adopting.
+```text
+docs/
+  practices/      Lifecycle practice docs (001-017)
+  methods/        Deep specs for specific quality
+                  methods (journey verification,
+                  trace analyzer)
 
-## Documentation
+plugins/          One folder per plugin
+  journey-verification/
+    plugin.json
+    .claude-plugin/
+    skills/
+    agents/
+    journeys/
 
-### Foundation
+instructions/     Copilot instruction samples
+agents/           Standalone AI agent samples
+skills/           Standalone AI skill samples
+hooks/            Copilot/Claude lifecycle hook
+                  samples
+prompts/          Copilot prompt samples
 
-- [The Problem](docs/001-problem.md) -- Why
-  existing practices fail when AI accelerates
-  delivery.
-- [Principles](docs/002-principles.md) -- Design
-  principles for documentation, instructions,
-  and verification.
+.github/          CI/CD config, issue templates,
+                  this repo's own Copilot config
+```
 
-### Layers
+The top-level artifact folders (`agents/`, `skills/`,
+`hooks/`, `prompts/`) follow the awesome-copilot
+catalog pattern. Most are placeholders today and
+will fill in as samples emerge. Plugins are the
+preferred packaging when artifacts work together.
 
-- [Layer by Layer](docs/003-layers.md) -- The six
-  layers, told as a day-by-day evolution.
-- [Observability](docs/004-observability.md) --
-  What to observe, when, and what constitutes
-  a finding.
+## Plugins
 
-### Journeys
+This repo currently ships one plugin:
 
-- [Journey Design](docs/005-journey-design.md) --
-  What a journey is, how to write one.
-- [Walk Procedure](docs/006-walk-procedure.md) --
-  Pre-walk, walk, report, fix, re-walk.
-- [Evaluation Criteria](docs/007-evaluation-criteria.md)
-  -- Scoped, binary criteria that replace
-  subjective scoring.
-- [Black Box vs White Box](docs/008-black-white-box.md)
-  -- Two evaluation modes with different context
-  boundaries.
-
-### Context
-
-- [Comparison](docs/009-comparison.md) -- How this
-  relates to TDD, BDD, SDD, vibe coding, and
-  adjacent approaches.
-- [Open Problems](docs/010-open-problems.md) --
-  Known gaps and future directions.
-
-### Reference
-
-- [Glossary](docs/011-glossary.md)
-- [Roadmap](docs/012-roadmap.md)
-- [Adoption Guide](docs/013-adoption-guide.md)
-- [Samples](samples/) -- Copy-and-adapt
-  instructions, skills, hooks, journeys.
-
-## Plugin
-
-Cross-tool plugin with skills and agents for
-AI-assisted verification.
-
-### Skills
-
-- **walk-journey** -- Walk a journey against a
-  callable surface
-- **evaluate-criteria** -- Evaluate walk results
-  against binary criteria
-- **design-journey** -- Design new journeys with
-  proper structure
-- **analyze-trace** -- Analyze distributed traces
-  for quality metrics
-
-### Agent
-
-- **journey-walker** -- Specialized verification
-  agent that walks journeys
+- **journey-verification** —
+  [plugins/journey-verification/](plugins/journey-verification/).
+  Skills and an agent for designing journeys,
+  walking them against a callable surface,
+  evaluating binary criteria, and analyzing traces.
+  Specification: [docs/methods/journey-verification/](docs/methods/journey-verification/).
 
 ### Install
 
@@ -135,27 +101,15 @@ https://github.com/GiviKDev/ai-driven-development
 **Claude Code**:
 
 ```text
-/plugin install ai-driven-development
-```
-
-## Repository Structure
-
-```text
-docs/           Methodology specification (numbered)
-plugin/         Cross-tool plugin (skills, agents)
-samples/        Copy-and-adapt samples
-specs/          Tooling specifications
-.github/        CI/CD, templates, instructions
+/plugin install journey-verification
 ```
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for
-guidelines. This project follows the
-[Contributor Covenant](CODE_OF_CONDUCT.md)
-code of conduct.
+See [CONTRIBUTING.md](CONTRIBUTING.md). This project
+follows the [Contributor Covenant](CODE_OF_CONDUCT.md).
 
-### Local Setup
+### Local setup
 
 ```bash
 git clone https://github.com/GiviKDev/ai-driven-development.git
@@ -165,9 +119,9 @@ make setup
 
 ## Blog
 
-Read the concise overview at
+Concise overview at
 [givikdev.github.io/ai-driven-development](https://givikdev.github.io/ai-driven-development/).
 
 ## License
 
-[CC BY 4.0](LICENSE) -- share, adapt, attribute.
+[CC BY 4.0](LICENSE) — share, adapt, attribute.

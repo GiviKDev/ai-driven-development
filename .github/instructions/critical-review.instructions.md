@@ -18,19 +18,17 @@ evaluation before execution.
 Before implementing, evaluate against the
 documentation hierarchy (ordered by authority):
 
-1. **Principles** (`docs/002-principles.md`) --
+1. **Principles** (`docs/practices/002-principles.md`) --
    brief, alive, structured, opinionated,
    enforceable. If the request violates these,
    it is almost certainly wrong.
-2. **Layers** (`docs/003-layers.md`) -- journey
-   design, walking procedure, evaluation,
-   observability. Changes must respect the layer
-   model.
-3. **Methodology docs** (`docs/`) -- the numbered
-   sequence is the specification. Contradicting
-   it requires updating the doc, not ignoring it.
-4. **Plugin** (`plugin/`) -- skills and agents
-   must align with the methodology they implement.
+2. **Practice docs** (`docs/`) -- the numbered
+   sequence (001-017) covers project lifecycle
+   from problem definition through evolution.
+   Contradicting them requires updating the doc,
+   not ignoring it.
+3. **Plugins** (`plugins/`) -- skills and agents
+   must align with the practices they implement.
 
 Also evaluate:
 
@@ -50,7 +48,7 @@ Every opinion must reference one of:
 
 - Actual content in the workspace (doc, skill,
   agent, config)
-- A methodology principle or layer definition
+- A practice principle from `docs/practices/002-principles.md`
 - A concrete technical constraint (tool behavior,
   manifest format, CI pipeline)
 - A documented standard (OWASP, specific RFC,

@@ -1,16 +1,16 @@
 # Contributing
 
 Thank you for your interest in AI-Driven Development.
-This project is a methodology and a plugin -- not a
-code library. Contributions are primarily prose,
-skill definitions, and feedback.
+This project is a practice system, samples, and a
+plugin — not a code library. Contributions are
+primarily prose, skill definitions, and feedback.
 
 ## What we accept
 
-### Methodology feedback
+### Practice feedback
 
 The most valuable contribution is critical feedback
-on the methodology itself:
+on the practices themselves:
 
 - Does a concept not make sense? Open an issue.
 - Is a recommendation wrong? Open an issue with your
@@ -18,7 +18,8 @@ on the methodology itself:
 - Is something missing? Open an issue describing the
   gap.
 
-Use the "Methodology Feedback" issue template.
+Use the "Methodology Feedback" issue template (it
+applies equally to practice feedback).
 
 ### Documentation fixes
 
@@ -27,38 +28,40 @@ directly. No issue needed for small fixes.
 
 ### New samples
 
-The `samples/` directory contains copy-and-adapt
-samples. If you have a useful instruction file,
-skill, hook, or journey that others could learn
-from, submit a PR.
+The top-level folders `agents/`, `skills/`, `hooks/`,
+`instructions/`, and `prompts/` catalog standalone
+AI artifact samples. The `plugins/` folder contains
+packaged plugins. If you have a useful sample or
+plugin contribution, submit a PR to the appropriate
+folder.
 
 Requirements for sample PRs:
 
 - The sample must be generic (not tied to a specific
   proprietary project)
 - Include comments explaining why each rule exists
-- Follow the existing format in the samples directory
+- Follow the existing format in the target folder
 
 ### Plugin improvements
 
-Skills and agent definitions in `plugin/` can be
-improved. If you find a skill that produces poor
+Skills and agent definitions in `plugins/<name>/`
+can be improved. If you find a skill that produces poor
 results, submit a PR with the improvement and explain
 what was wrong and why the change is better.
 
-### Comparisons
+### Comparisons and alternatives
 
-The comparison doc (`docs/009-comparison.md`) covers
-TDD, BDD, SDD, vibe coding, and adjacent approaches.
-If you know of a methodology or approach that should
-be compared, open an issue or submit a PR.
+Each document in `docs/` lists alternative
+approaches at the end. If you know of an approach
+that should be compared, open an issue or submit a
+PR against the relevant document.
 
 ## What we do not accept
 
 - Marketing language, filler, or vague
   recommendations
 - Changes that contradict the principles in
-  `docs/002-principles.md` without strong
+  `docs/practices/002-principles.md` without strong
   justification
 - Features or code that belong in a separate
   implementation repository
@@ -79,7 +82,7 @@ be compared, open an issue or submit a PR.
 - Be opinionated. Take a position.
 - No em dashes. Use " -- " or rephrase.
 - Wrap lines at 50-60 characters.
-- See `docs/002-principles.md` for the full set of
+- See `docs/practices/002-principles.md` for the full set of
   design principles.
 
 ## License

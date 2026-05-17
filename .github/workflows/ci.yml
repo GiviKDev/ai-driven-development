@@ -28,15 +28,15 @@ jobs:
 
       - name: Validate plugin.json files are valid JSON
         run: |
-          jq empty plugin/plugin.json
-          jq empty plugin/.claude-plugin/plugin.json
+          jq empty plugins/journey-verification/plugin.json
+          jq empty plugins/journey-verification/.claude-plugin/plugin.json
 
       - name: Check required fields in Copilot manifest
         run: |
           for field in name description version skills agents; do
-            value=$(jq -r ".$field" plugin/plugin.json)
+            value=$(jq -r ".$field" plugins/journey-verification/plugin.json)
             if [ "$value" = "null" ] || [ -z "$value" ]; then
-              echo "ERROR: Missing required field '$field' in plugin/plugin.json"
+              echo "ERROR: Missing required field '$field' in plugins/journey-verification/plugin.json"
               exit 1
             fi
           done
@@ -45,9 +45,9 @@ jobs:
       - name: Check required fields in Claude Code manifest
         run: |
           for field in name description version; do
-            value=$(jq -r ".$field" plugin/.claude-plugin/plugin.json)
+            value=$(jq -r ".$field" plugins/journey-verification/.claude-plugin/plugin.json)
             if [ "$value" = "null" ] || [ -z "$value" ]; then
-              echo "ERROR: Missing required field '$field' in plugin/.claude-plugin/plugin.json"
+              echo "ERROR: Missing required field '$field' in plugins/journey-verification/.claude-plugin/plugin.json"
               exit 1
             fi
           done
@@ -55,10 +55,10 @@ jobs:
 
       - name: Check manifests are in sync
         run: |
-          copilot_name=$(jq -r '.name' plugin/plugin.json)
-          claude_name=$(jq -r '.name' plugin/.claude-plugin/plugin.json)
-          copilot_version=$(jq -r '.version' plugin/plugin.json)
-          claude_version=$(jq -r '.version' plugin/.claude-plugin/plugin.json)
+          copilot_name=$(jq -r '.name' plugins/journey-verification/plugin.json)
+          claude_name=$(jq -r '.name' plugins/journey-verification/.claude-plugin/plugin.json)
+          copilot_version=$(jq -r '.version' plugins/journey-verification/plugin.json)
+          claude_version=$(jq -r '.version' plugins/journey-verification/.claude-plugin/plugin.json)
 
           if [ "$copilot_name" != "$claude_name" ]; then
             echo "ERROR: Name mismatch: '$copilot_name' vs '$claude_name'"
@@ -73,7 +73,7 @@ jobs:
       - name: Validate SKILL.md frontmatter
         run: |
           failed=0
-          for skill in plugin/skills/*/SKILL.md; do
+          for skill in plugins/journey-verification/skills/*/SKILL.md; do
             dir=$(basename "$(dirname "$skill")")
             frontmatter=$(sed -n '/^---$/,/^---$/p' "$skill" | sed '1d;$d')
 
@@ -95,11 +95,11 @@ jobs:
 
       - name: Validate agent files
         run: |
-          if [ ! -d plugin/agents ] || [ -z "$(ls plugin/agents/*.agent.md 2>/dev/null)" ]; then
-            echo "ERROR: No agent files found in plugin/agents/"
+          if [ ! -d plugins/journey-verification/agents ] || [ -z "$(ls plugins/journey-verification/agents/*.agent.md 2>/dev/null)" ]; then
+            echo "ERROR: No agent files found in plugins/journey-verification/agents/"
             exit 1
           fi
-          for agent in plugin/agents/*.agent.md; do
+          for agent in plugins/journey-verification/agents/*.agent.md; do
             if [ ! -s "$agent" ]; then
               echo "ERROR: $agent is empty"
               exit 1

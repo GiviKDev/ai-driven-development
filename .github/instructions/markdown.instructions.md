@@ -23,7 +23,7 @@ description: 'General markdown formatting rules for
 ## Links
 
 - Use relative paths for internal links:
-  `[principles](docs/002-principles.md)`
+  `[principles](docs/practices/002-principles.md)`
 - Link to specific files, not folders.
 - Do not use bare URLs -- always wrap in link
   syntax.

@@ -1,5 +1,5 @@
 ---
-applyTo: "plugin/**"
+applyTo: "plugins/**"
 ---
 
 # Plugin Development Rules

@@ -27,11 +27,11 @@ check-links: ## Check for broken links (not in pre-commit)
 # --- Plugin ---
 
 validate-plugin: ## Validate plugin manifests and skills
-	@jq empty plugin/plugin.json && echo "plugin.json: valid JSON"
-	@jq empty plugin/.claude-plugin/plugin.json && \
+	@jq empty plugins/journey-verification/plugin.json && echo "plugin.json: valid JSON"
+	@jq empty plugins/journey-verification/.claude-plugin/plugin.json && \
 		echo ".claude-plugin/plugin.json: valid JSON"
-	@copilot=$$(jq -r '.version' plugin/plugin.json); \
-	 claude=$$(jq -r '.version' plugin/.claude-plugin/plugin.json); \
+	@copilot=$$(jq -r '.version' plugins/journey-verification/plugin.json); \
+	 claude=$$(jq -r '.version' plugins/journey-verification/.claude-plugin/plugin.json); \
 	 if [ "$$copilot" != "$$claude" ]; then \
 	   echo "ERROR: version mismatch $$copilot vs $$claude"; exit 1; \
 	 fi; \

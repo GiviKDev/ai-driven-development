@@ -45,18 +45,18 @@ plugins:
   - - "@semantic-release/exec"
     - prepareCmd: >
         jq --arg v "${nextRelease.version}"
-        '.version = $v' plugin/plugin.json >
-        plugin/plugin.json.tmp &&
-        mv plugin/plugin.json.tmp plugin/plugin.json &&
+        '.version = $v' plugins/journey-verification/plugin.json >
+        plugins/journey-verification/plugin.json.tmp &&
+        mv plugins/journey-verification/plugin.json.tmp plugins/journey-verification/plugin.json &&
         jq --arg v "${nextRelease.version}"
-        '.version = $v' plugin/.claude-plugin/plugin.json >
-        plugin/.claude-plugin/plugin.json.tmp &&
-        mv plugin/.claude-plugin/plugin.json.tmp
-        plugin/.claude-plugin/plugin.json
+        '.version = $v' plugins/journey-verification/.claude-plugin/plugin.json >
+        plugins/journey-verification/.claude-plugin/plugin.json.tmp &&
+        mv plugins/journey-verification/.claude-plugin/plugin.json.tmp
+        plugins/journey-verification/.claude-plugin/plugin.json
   - - "@semantic-release/git"
     - assets:
         - CHANGELOG.md
-        - plugin/plugin.json
-        - plugin/.claude-plugin/plugin.json
+        - plugins/journey-verification/plugin.json
+        - plugins/journey-verification/.claude-plugin/plugin.json
       message: "chore(release): ${nextRelease.version} [skip ci]"
   - "@semantic-release/github"
