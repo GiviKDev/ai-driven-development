@@ -1,3 +1,18 @@
+## [0.2.0](https://github.com/GiviKDev/ai-driven-development/compare/v0.1.1...v0.2.0) (2026-05-17)
+
+### ⚠ BREAKING CHANGES
+
+* **plugin:** plugin/ moved to plugins/journey-verification/.
+Plugin name renamed accordingly in plugin.json and
+.claude-plugin/plugin.json.
+* **docs:** All paths under docs/ have moved. specs/ removed.
+
+### Refactoring
+
+* **docs:** split docs into practices/ and methods/ ([4034379](https://github.com/GiviKDev/ai-driven-development/commit/40343798dfa46e355bf9749bec58456d23845e8f))
+* **plugin:** rename plugin/ to plugins/journey-verification/ ([10e9f0e](https://github.com/GiviKDev/ai-driven-development/commit/10e9f0e99cdb53fc024d34a9564fdd72b749044f))
+* update path references after restructure ([a2c0e0e](https://github.com/GiviKDev/ai-driven-development/commit/a2c0e0e3f0be0ae1b7de46b1607f85d8370e4808))
+
 ## [0.1.1](https://github.com/GiviKDev/ai-driven-development/compare/v0.1.0...v0.1.1) (2026-05-11)
 
 ### Bug Fixes
