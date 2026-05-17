@@ -1,120 +1,123 @@
-# Problem
+# The Problem
 
-Software projects evolve through stages. Each stage
-introduces problems the previous one did not have.
-This repository documents those problems and the
-approaches that address them, so the same lessons do
-not need to be learned twice.
+AI-assisted development delivers features at a
+rate that outpaces human comprehension. This
+creates a specific failure mode: the system
+evolves faster than anyone's mental model of it.
 
-## What this is
+This repository systemizes my approach to
+building software with AI — the practices,
+methods, and tools that keep the system
+comprehensible while delivery accelerates. It is
+written first for me, then for anyone working
+through the same problems.
 
-A living practice system describing how to take a
-software project from nothing to a working, evolving
-product. It documents:
+## The Acceleration Gap
 
-- Problems that appear at each stage of a project's
-  life.
-- Practices, methods, and tools that address each
-  problem.
-- When each approach applies and when it does not.
+A developer using AI can ship in days what
+previously took weeks. In traditional development,
+writing the code forces the developer to reason
+through each piece, building a model of the system
+as a side effect. AI inverts this: the developer
+reviews finished code, and the same depth of model
+only forms if they read it as carefully as if they
+had written it. Under delivery pressure, they often
+do not. The code works — tests pass, endpoints
+return 200 — but the developer's understanding of
+the system's behavior, edge cases, cross-module
+interactions, and failure modes degrades with every
+feature shipped.
 
-This is a personal record refined through practice
-and feedback. It is not a framework, library, or
-universal methodology. It is a set of documented
-choices and the reasoning behind them.
+This is not a team size problem. It is the gap
+between delivery speed and comprehension speed.
 
-## Who this is for
+## What Breaks
 
-- Anyone building software with AI assistance who
-  wants a structured way to organize practices,
-  instructions, and tools.
-- Anyone working solo on a project that has grown
-  beyond what they can hold in their head.
-- Anyone who finds existing methodology guides too
-  abstract or too prescriptive.
+### Mental model drift
 
-The practices apply whether AI participates or not.
-AI changes the speed and the failure modes, not the
-underlying need for clear intent, working code,
-visible behavior, and verifiable outcomes.
+The developer's understanding of the system
+diverges from the system's actual behavior. This
+is invisible until a bug report arrives or an
+integration fails. The gap widens with every
+AI-generated feature.
 
-## The recurring pattern
+### Cross-module blindness
 
-Across every stage of a project, the same shape
-repeats:
+AI agents work on one feature at a time. They do
+not naturally consider how a change in module A
+affects consumers in module B, C, or D. A
+successful HTTP response hides a failed event
+handler.
 
-1. Something is missing or unclear.
-2. The gap creates friction or invisible failures.
-3. A practice, tool, or method addresses it.
-4. New problems appear that the previous solution
-   does not cover.
+### Quality theater
 
-This is true whether the project is starting from
-nothing or already running in production. The system
-is never finished. It loops back through
-redefinition, refactoring, and improvement.
+Unit tests pass. Integration tests pass. The
+endpoint returns the expected shape. But:
 
-## What AI changes
+- A handler loads the same entity three times
+  because nobody checked the execution trace.
+- An async consumer silently fails because its
+  dependency registration is missing.
+- The API schema marks optional fields as required
+  because the binding generates the wrong schema.
+- The error response returns a generic message
+  instead of structured diagnostics.
 
-AI accelerates code production and lowers the cost
-of producing artifacts (docs, tests, scripts,
-configurations). It does not change what makes
-software correct, maintainable, or trustworthy.
+Tests do not catch these. Code review does not
+catch these. Only exercising the system end to end
+as a real user, then inspecting the trace, reveals
+them.
 
-What AI makes more important:
+### Documentation decay
 
-- **Explicit intent.** AI optimizes locally. Without
-  a clear problem statement and scope, it produces
-  consistent code that solves the wrong problem.
-- **Enforceable standards.** AI follows examples.
-  Without standards encoded in instruction files,
-  AI uses whatever pattern its training favors.
-- **Visible behavior.** AI generates code that
-  passes the tests in front of it. Verifying that
-  the system actually behaves correctly requires
-  looking at what runs, not what compiles.
-- **Tools that remove guesswork.** Formatters,
-  linters, schema validators, and security scanners
-  eliminate categories of mistakes so AI (and
-  humans) do not have to think about them.
+AI follows documentation — when it can find it,
+when it is current, and when the instructions are
+specific enough. Documentation drifts from reality
+because nobody re-reads it after writing it. The
+system changes; the docs do not. AI then follows
+stale docs and produces code that contradicts the
+system's current state.
 
-What AI does not change:
+## AI Does Not Replace Deterministic Tooling
 
-- Good engineering still requires reading code,
-  reviewing changes, and writing tests that catch
-  what matters.
-- Quality control still falls apart if checks are
-  advisory instead of enforced.
-- Documentation still rots if the workflow does not
-  keep it current.
+AI does not replace static analyzers, linters,
+formatters, tests, or any other established
+quality tool. Those tools solve specific problems
+deterministically. AI cannot — its mistakes are
+unique each time.
 
-This repository documents practices for both: what
-AI shifts and what stays the same.
+Without correct tooling, you depend too much on
+AI. With correct tooling, AI becomes a multiplier
+that abstracts parts of the development process
+while the environment catches its mistakes.
 
-## How to use this repository
+## What AI Shifts
 
-The documentation is a flat set of problem-to-solution
-documents organized by lifecycle stage. Read what is
-relevant to your current need. Each document
-describes a problem, the approaches that address it,
-when each approach applies, and what problem appears
-next.
+AI does not change what makes software correct or
+maintainable. It does shift what matters most:
+intent must be explicit, standards must be
+enforceable, behavior must be visible, and
+deterministic tooling must catch what AI gets
+wrong. See [002-principles.md](002-principles.md).
 
-The repository also contains artifacts that implement
-the practices:
+## How Developers Adopt AI
 
-- [plugins/](../../plugins/) — installable plugins
-  for Copilot and Claude Code (one per workflow).
-- [instructions/](../../instructions/) — Copilot
-  instruction file samples to copy into your own
-  project.
-- [agents/](../../agents/), [skills/](../../skills/),
-  [hooks/](../../hooks/), [prompts/](../../prompts/)
-  — placeholders for standalone AI artifact
-  samples; currently empty.
-- [methods/](../methods/) — detailed specifications
-  for specific quality methods (journey
-  verification, trace analyzer).
+I have watched teams — and myself — go through
+four phases:
 
-Use the parts that fit. Ignore the parts that do
-not. Push back where the reasoning is wrong.
+1. **Excitement.** AI generates code fast. Output
+   volume jumps. Everything feels productive.
+2. **Over-reliance.** AI handles more decisions.
+   The developer's mental model falls behind the
+   system's actual state.
+3. **Disillusionment.** Bugs appear that tests do
+   not catch. The system surprises its own
+   developers.
+4. **Structured adoption.** The team builds
+   boundaries — instructions, quality gates,
+   verification practices — to keep AI productive
+   without sacrificing comprehension.
+
+This repository maps to phase 4. It systemizes
+the practices, methods, and tools that make
+structured adoption concrete and repeatable.

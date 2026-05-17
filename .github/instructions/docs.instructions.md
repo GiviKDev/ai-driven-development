@@ -20,7 +20,6 @@ applyTo: "docs/**/*.md"
   split it
 - No filler phrases: "it should be noted that",
   "it is important to", "in order to"
-- No em dashes. Use " -- " or rephrase
 - Use "this repository" or be specific (e.g.,
   "this document", "this practice") rather than
   repeating "AI-Driven Development"

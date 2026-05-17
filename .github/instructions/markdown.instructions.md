@@ -17,8 +17,6 @@ description: 'General markdown formatting rules for
   lists. Indent nested lists with two spaces.
 - Use fenced code blocks with language identifiers
   (e.g., ` ```yaml`, ` ```json`, ` ```bash`).
-- No em dashes. Use " -- " (space-hyphen-hyphen-
-  space) or rephrase.
 
 ## Links
 

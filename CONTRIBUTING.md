@@ -80,7 +80,6 @@ PR against the relevant document.
 
 - Plain language. No marketing copy.
 - Be opinionated. Take a position.
-- No em dashes. Use " -- " or rephrase.
 - Wrap lines at 50-60 characters.
 - See `docs/practices/002-principles.md` for the full set of
   design principles.

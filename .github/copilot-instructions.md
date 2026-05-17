@@ -28,7 +28,6 @@ plugins — not a framework or library.
 - Keep docs short enough to read in one sitting
 - Every recommendation should have a clear position
 - Use plain language. No marketing copy, no filler
-- No em dashes. Use " — " (space-hyphen-hyphen-space) or rephrase
 
 ## Repository structure
 

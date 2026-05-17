@@ -19,8 +19,6 @@ description: "Markdown formatting and writing rules"
 
 ## Punctuation
 
-- No em dashes. Use comma, hyphen, period, or
-  rewrite the sentence.
 - No curly quotes. Straight quotes only.
 
 ## Links
