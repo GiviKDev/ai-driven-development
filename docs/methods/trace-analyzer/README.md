@@ -15,7 +15,7 @@ compares them against thresholds.
 
 ## Why It Exists
 
-In the AI-Driven Development methodology, every
+In this practice system, every
 call during a journey walk is followed by trace
 analysis. Without this tool, trace analysis depends
 on AI interpretation of raw span data — which is

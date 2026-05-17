@@ -67,11 +67,11 @@ access. The walk tests what clients experience.
 
 After each call, inspect the distributed trace. Use
 the trace analysis tool if available (see
-[specs/trace-analyzer/](../specs/trace-analyzer/README.md)),
+[trace-analyzer/](../trace-analyzer/README.md)),
 or inspect manually via the observability dashboard.
 
 Check against healthy trace patterns defined in
-[004-observability.md](004-observability.md).
+[../../practices/009-observability.md](../../practices/009-observability.md).
 
 ### 3. Evaluate against criteria
 
@@ -127,7 +127,7 @@ The human decides:
 
 ## Black Box vs White Box
 
-See [008-black-white-box.md](008-black-white-box.md)
+See [black-white-box.md](black-white-box.md)
 for the two evaluation modes.
 
 ## Walk Data

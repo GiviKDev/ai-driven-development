@@ -136,7 +136,7 @@ mandates.
 
 Criteria that reference trace data should be
 verifiable by the trace analysis tool (see
-[specs/trace-analyzer/](../specs/trace-analyzer/README.md)).
+[trace-analyzer/](../trace-analyzer/README.md)).
 The tool extracts metrics; the criteria define
 thresholds; the comparison is deterministic.
 

@@ -1,11 +1,11 @@
-# Observability Methodology
+# Observability
 
 What to observe, when, and what constitutes a
 finding.
 
 ## Purpose
 
-Observability in this methodology is not production
+Observability in this practice is not production
 monitoring. It is development-time verification.
 Traces, logs, and metrics are the evidence used to
 evaluate whether the system behaves correctly — not
@@ -118,7 +118,7 @@ trace analysis tool (MCP server) should:
    judgments — binary violations with evidence).
 
 See
-[specs/trace-analyzer/README.md](../specs/trace-analyzer/README.md)
+[../methods/trace-analyzer/README.md](../methods/trace-analyzer/README.md)
 for the specification.
 
 ## Development Dashboard

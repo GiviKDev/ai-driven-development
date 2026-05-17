@@ -101,9 +101,11 @@ Reduce this surface.
   safety boundary.
 
 The principle: AI operates inside a well-defined
-toolbox. The developer defines the toolbox. See
-[samples/hooks/](../samples/hooks/) for a concrete
-example.
+toolbox. The developer defines the toolbox. The
+repository's own [Makefile](../../Makefile)
+illustrates the pattern: AI can run `make
+pre-commit` freely; modifying the Makefile itself
+requires explicit permission.
 
 ## Verification Over Trust
 

@@ -137,7 +137,7 @@ matter.
 
 If any of these is "no," fix it before walking. The
 pre-walk (see
-[006-walk-procedure.md](006-walk-procedure.md)) will
+[walk-procedure.md](walk-procedure.md)) will
 catch missing tools, but design issues should be
 caught here.
 
