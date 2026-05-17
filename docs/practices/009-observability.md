@@ -19,9 +19,11 @@ Distributed traces show the full execution path of a
 request: every span, every DB query, every message
 handler, every external call.
 
-**When to inspect**: After every callable surface
-invocation during a journey walk. Not selectively —
-every step.
+**When to inspect**: After every meaningful
+invocation of a callable surface — manual smoke
+check, automated test run, or a method like a
+journey walk. Inspect every step, not a sampled
+subset.
 
 **What to look for**:
 
@@ -59,7 +61,8 @@ when the trace raises a question.
 Request counts, error rates, latency distributions,
 message queue depths.
 
-**When to inspect**: After a journey walk completes.
+**When to inspect**: After a verification pass
+completes (test run, journey walk, load run).
 Compare aggregate metrics before and after a change
 to detect regressions.
 
@@ -112,8 +115,9 @@ trace analysis tool (MCP server) should:
 2. Extract structured metrics: span count, DB query
    count, errored spans, duplicate entity loads,
    external call durations, consumer success/failure.
-3. Compare metrics against budgets defined in
-   evaluation criteria.
+3. Compare metrics against budgets defined by the
+   caller (criteria belong to whichever method
+   invokes the tool).
 4. Return structured violations (not scores, not
    judgments — binary violations with evidence).
 
@@ -136,5 +140,4 @@ Options:
 
 The dashboard must be accessible to both the developer
 (for manual inspection) and to AI tools (via MCP or
-API) for automated trace analysis during journey
-walks.
+API) for automated trace analysis during verification.
