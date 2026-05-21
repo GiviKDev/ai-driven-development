@@ -109,6 +109,51 @@ A tool that grades trace quality (coverage,
 naming, attribute completeness, context
 propagation) would close a real industry gap.
 
+## Project structure and scaffolding
+
+### Containerization practices
+
+The practices cover code quality, testing, and
+delivery pipelines but say nothing about container
+patterns: multi-stage builds, image layering,
+base image selection, registry publishing, or
+health check design. For projects that ship Docker
+images, these are architectural decisions on par
+with coding standards — and the enforcement ladder
+applies (Dockerfile linting, image scanning in CI).
+
+### Multi-artifact repo patterns
+
+004-project-structure mentions monorepo as an
+alternative but does not describe how to manage a
+repository producing multiple deployable units
+from one codebase. Open questions:
+
+- Workspace layout (uv workspaces, npm workspaces,
+  .NET solution with multiple projects).
+- Shared code boundaries — what can be shared vs
+  what must be duplicated for independent deploy.
+- Independent vs lockstep versioning of artifacts.
+- CI matrix: build all vs build-affected-only.
+
+### Repo scaffolding bridge
+
+The practices provide a decision framework
+(enforcement ladder, Makefile boundary, instruction
+files, one-concept-per-file). They do NOT provide
+concrete tool choices for specific stacks. When AI
+uses these practices to scaffold a new repo, it
+must reverse-engineer the translation from
+principles to tool configuration.
+
+A scaffolding skill or prompt template that maps
+"stack + deployment model + practices" to a
+concrete repo setup would close this gap. The
+language-specific choices (ruff for Python, dotnet
+format for C#, gofmt for Go) belong in that
+generative artifact — not in the static practice
+docs.
+
 ## Automation and process
 
 ### Human bottleneck
