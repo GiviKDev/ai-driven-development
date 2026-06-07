@@ -1,3 +1,14 @@
+## [0.3.0](https://github.com/GiviKDev/ai-driven-development/compare/v0.2.0...v0.3.0) (2026-06-07)
+
+### Features
+
+* **docs:** add containerization practices and multi-artifact repo patterns to open problems ([e98e15b](https://github.com/GiviKDev/ai-driven-development/commit/e98e15ba38a012db10471258c8f2e24c73822cd5))
+
+### Refactoring
+
+* address audit findings across practices, methods, and structure ([3d75783](https://github.com/GiviKDev/ai-driven-development/commit/3d75783eba71376130e688aafe3258f2e50c47f6))
+* **docs:** standardize punctuation rules across documentation ([c13ad5d](https://github.com/GiviKDev/ai-driven-development/commit/c13ad5d020af4be2a02470752e695738e47b6574))
+
 ## [0.2.0](https://github.com/GiviKDev/ai-driven-development/compare/v0.1.1...v0.2.0) (2026-05-17)
 
 ### ⚠ BREAKING CHANGES
