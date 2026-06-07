@@ -22,6 +22,33 @@ the absence of red.
 
 ## Approaches
 
+### Harness engineering
+
+A harness is the repeatable environment around a
+quality check. It gives humans and AI the same way to
+set up state, exercise behavior, collect evidence,
+and decide pass or fail.
+
+A useful harness includes:
+
+- A command or callable surface to run.
+- Known setup and reset steps.
+- Fixtures or seed data.
+- Expected outputs or binary criteria.
+- Trace, log, or metric capture when internal
+  evidence matters.
+- Clear failure output.
+
+Harness engineering matters more when AI is doing
+substantial work. Without a harness, the agent can
+only make plausible claims. With a harness, it can
+run the system and return evidence.
+
+In this repository, journey verification and trace
+analysis are harness engineering. They turn user
+flows, budgets, and observations into repeatable
+checks against a live system.
+
 ### The baseline: tests
 
 Every project needs tests. The question is which

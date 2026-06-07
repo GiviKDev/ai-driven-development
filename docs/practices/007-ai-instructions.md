@@ -69,6 +69,45 @@ Most rules apply to a subset of files. Use
 Scoped files can be longer because they only load
 in context where they matter.
 
+### Prompt engineering
+
+Prompt engineering is task-level direction. A good
+prompt names the goal, constraints, expected output,
+examples, anti-examples, and validation step.
+
+Use prompt files for focused repeatable tasks. Do
+not use long prompts as project memory. Stable
+project knowledge belongs in docs, instructions,
+skills, agents, or plugins.
+
+### Context engineering
+
+Context engineering decides what the AI sees before
+it answers. Good context is intentional and loaded at
+the narrowest useful scope:
+
+- Docs hold durable project knowledge.
+- Instructions hold always-on or path-scoped rules.
+- Skills hold on-demand procedures and resources.
+- Agents hold role, tool, and communication rules.
+- Plugins package workflows that need multiple
+  artifacts together.
+
+More context is not automatically better. Load the
+smallest context that lets the AI make the next
+decision correctly.
+
+### Harness engineering
+
+Harness engineering gives AI a repeatable way to
+prove or disprove its work. A harness defines how to
+set up state, exercise the system, collect evidence,
+and compare results against clear criteria.
+
+Prompts ask. Context informs. Harnesses verify. For
+quality mechanisms, see [010-quality.md](010-quality.md)
+and [011-automation.md](011-automation.md).
+
 ### Instructions are negotiable, build rules are not
 
 Instruction files tell AI what to do. They do not

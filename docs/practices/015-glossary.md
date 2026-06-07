@@ -24,6 +24,28 @@ A markdown file with YAML frontmatter (`applyTo`,
 Code) load automatically based on the files in
 context. See [007-ai-instructions.md](007-ai-instructions.md).
 
+## Prompt Engineering
+
+Designing task-level prompts so AI understands the
+goal, constraints, expected output, examples, and
+validation step. Useful for one focused task. Not a
+substitute for project memory.
+
+## Context Engineering
+
+Designing what context reaches AI and when. Docs,
+instructions, skills, agents, and plugins are all
+context mechanisms. Good context is scoped narrowly
+enough to stay relevant.
+
+## Harness Engineering
+
+Designing the repeatable environment that exercises
+a system and produces evidence: setup, fixtures,
+callable surface, checks, traces, logs, metrics,
+and cleanup. Harnesses turn AI claims into
+verifiable results. See [010-quality.md](010-quality.md).
+
 ## Callable Surface
 
 The interface through which a system is exercised

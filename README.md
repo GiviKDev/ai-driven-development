@@ -47,6 +47,9 @@ problem.
 ## Repository layout
 
 ```text
+AGENTS.md        Canonical cross-agent instructions
+CLAUDE.md        Claude Code adapter importing AGENTS.md
+
 docs/
   practices/      Lifecycle practice docs (001-017)
   methods/        Deep specs for specific quality
@@ -73,12 +76,16 @@ prompts/          Copilot prompt samples
 ```
 
 The top-level artifact folders (`agents/`, `skills/`,
-`hooks/`, `prompts/`) follow the awesome-copilot
-catalog pattern. Most are placeholders today and
-will fill in as samples emerge. Plugins are the
-preferred packaging when artifacts work together.
+`hooks/`, `prompts/`, `instructions/`) are catalogs,
+not active tool-discovery locations. Most are
+placeholders today and will fill in as samples
+emerge. Plugins are the preferred packaging when
+artifacts work together.
 
 ## Plugins
+
+See [plugins/README.md](plugins/README.md) for the
+plugin packaging rules.
 
 This repo currently ships one plugin:
 

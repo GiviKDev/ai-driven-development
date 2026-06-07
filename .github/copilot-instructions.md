@@ -1,4 +1,13 @@
-# AI-Driven Development — Repository Context
+# AI-Driven Development — Copilot Context
+
+[../AGENTS.md](../AGENTS.md) is the canonical
+cross-agent guide for this repository. This file is
+the Copilot adapter: it keeps the essential context
+near `.github/` for Copilot surfaces that prioritize
+Copilot instruction files.
+
+If this file and `AGENTS.md` diverge, update both and
+treat `AGENTS.md` as the source of truth.
 
 This repository is a personal **practice system** for building software with
 AI as a working partner. It contains documents, instruction samples, and
@@ -8,7 +17,7 @@ plugins — not a framework or library.
 
 - Markdown documents describing practices (`docs/practices/`)
 - Detailed specs for specific quality methods (`docs/methods/`)
-- Copilot/Claude plugins (`plugins/<plugin-name>/`)
+- Cross-tool agent plugins (`plugins/<plugin-name>/`)
 - Top-level catalogs for standalone AI artifact samples
   (`agents/`, `skills/`, `hooks/`, `instructions/`, `prompts/`)
 - Open source under CC BY 4.0

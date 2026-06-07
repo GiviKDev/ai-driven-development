@@ -7,7 +7,14 @@ adapt the rules to your stack.
 
 These are **not** the instructions that govern this
 repository. This repository's own instructions
-live in `.github/instructions/`.
+live in `AGENTS.md`, `CLAUDE.md`,
+`.github/copilot-instructions.md`, and
+`.github/instructions/`.
+
+Use `AGENTS.md` for cross-agent repository guidance,
+tool-specific adapters only when a tool needs a
+different entrypoint, and scoped instruction files
+when rules apply to a subset of paths.
 
 ## Contents
 
