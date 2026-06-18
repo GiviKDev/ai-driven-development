@@ -48,7 +48,6 @@ problem.
 
 ```text
 AGENTS.md        Canonical cross-agent instructions
-CLAUDE.md        Claude Code adapter importing AGENTS.md
 
 docs/
   practices/      Lifecycle practice docs (001-017)
@@ -64,15 +63,14 @@ plugins/          One folder per plugin
     agents/
     journeys/
 
-instructions/     Copilot instruction samples
+instructions/     AI instruction samples
 agents/           Standalone AI agent samples
 skills/           Standalone AI skill samples
-hooks/            Copilot/Claude lifecycle hook
-                  samples
-prompts/          Copilot prompt samples
+hooks/            AI lifecycle hook samples
+prompts/          AI prompt samples
 
-.github/          CI/CD config, issue templates,
-                  this repo's own Copilot config
+.github/          GitHub CI/CD config, Dependabot,
+                  issue templates, PR template
 ```
 
 The top-level artifact folders (`agents/`, `skills/`,

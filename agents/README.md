@@ -10,9 +10,9 @@ Agents that work together with skills belong in
 `plugins/` instead.
 
 This is not an active tool-discovery location. To
-make an agent active in a project, place it under
-`.github/agents/`, `.claude/agents/`, or a plugin's
-`agents/` directory.
+make an agent active in a project, place it in the
+agent location your tool supports, or inside a
+plugin's `agents/` directory.
 
 Use an agent when the work needs a specialized role,
 tool restrictions, context isolation, or handoff to

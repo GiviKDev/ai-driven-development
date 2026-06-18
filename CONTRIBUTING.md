@@ -71,7 +71,7 @@ PR against the relevant document.
 2. Create a branch from `main`
 3. Make your changes
 4. Ensure your changes follow the writing rules in
-   `.github/instructions/docs.instructions.md`
+  [AGENTS.md](AGENTS.md)
 5. Submit a PR with a clear description of what
    changed and why
 

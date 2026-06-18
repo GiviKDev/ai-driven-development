@@ -6,10 +6,9 @@ that happens.
 
 ## The problem
 
-AI tools (Copilot, Claude Code, others) do not read
-your `docs/` folder by default. Every new chat
-session starts blank. Without explicit instruction
-loading:
+Most AI tools do not read your `docs/` folder by
+default. Every new chat session starts blank.
+Without explicit instruction loading:
 
 - AI uses training-data defaults instead of your
   project's standards.
@@ -28,8 +27,8 @@ practice.
 ### Instruction files with apply patterns
 
 Files that AI tools load automatically when they
-match a pattern. The standard format across Copilot
-and Claude Code:
+match a pattern. Many tools use front matter to
+describe the scope:
 
 ```markdown
 ---
@@ -48,11 +47,15 @@ without being asked.
 
 ### Repository-level instructions
 
-A `copilot-instructions.md` or `AGENTS.md` file at
-the repository root loads on every AI interaction.
-Use for facts that apply everywhere: what the repo
-is, language conventions, hard constraints (no
-heredocs, no emoji, etc.).
+An `AGENTS.md` file at the repository root is the
+portable default for repository-level guidance. Use
+it for facts that apply everywhere: what the repo is,
+language conventions, validation commands, and hard
+constraints.
+
+If a tool requires a different entrypoint, add a
+thin adapter that points back to the shared source.
+Do not maintain separate copies of the same rules.
 
 Keep it short. Long root instructions get
 truncated.
@@ -126,11 +129,14 @@ rules (see [008-tools.md](008-tools.md)).
 
 ### Cross-tool portability
 
-Copilot reads `.github/instructions/*.instructions.md`
-and `.github/copilot-instructions.md`. Claude Code
-reads `AGENTS.md` and selected paths. Where
-possible, structure rules so the same file works in
-multiple tools. Where not possible, mirror.
+Start with platform-neutral instructions in
+`AGENTS.md`. Add scoped instruction samples only
+when rules apply to a subset of paths. Install those
+samples into whatever location a tool supports.
+
+Mirror rules only when a platform cannot read the
+shared source. Mirrored files must stay small and
+point back to the canonical guidance.
 
 ## When this matters
 

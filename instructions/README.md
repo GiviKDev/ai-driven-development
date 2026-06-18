@@ -1,20 +1,18 @@
 # Instructions
 
-Sample Copilot instruction files for use in your
-own projects. Copy the files you need into your
-repository's `.github/instructions/` folder and
-adapt the rules to your stack.
+Sample AI instruction files for use in your own
+projects. Copy the files you need into the
+instruction location your tool supports and adapt
+the rules to your stack.
 
 These are **not** the instructions that govern this
-repository. This repository's own instructions
-live in `AGENTS.md`, `CLAUDE.md`,
-`.github/copilot-instructions.md`, and
-`.github/instructions/`.
+repository. This repository's own active guidance
+lives in [../AGENTS.md](../AGENTS.md).
 
-Use `AGENTS.md` for cross-agent repository guidance,
-tool-specific adapters only when a tool needs a
-different entrypoint, and scoped instruction files
-when rules apply to a subset of paths.
+Use `AGENTS.md` for cross-agent repository guidance.
+Add tool-specific adapters only when a tool needs a
+different entrypoint, and keep those adapters as
+thin pointers to the shared source.
 
 ## Contents
 

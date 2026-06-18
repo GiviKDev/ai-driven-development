@@ -17,7 +17,7 @@ real-world validation continue.
   `docs/methods/trace-analyzer/`.
 - Plugin layout in `plugins/journey-verification/`
   with skills and an agent.
-- Sample Copilot instructions in `instructions/`.
+- Sample AI instructions in `instructions/`.
 - Top-level placeholders for future AI artifact
   samples: `agents/`, `skills/`, `hooks/`,
   `prompts/`.
@@ -26,7 +26,7 @@ real-world validation continue.
 
 ### Plugin
 
-Cross-tool plugin (Copilot + Claude Code) with:
+Cross-tool plugin package with:
 
 - [x] walk-journey skill
 - [x] evaluate-criteria skill
@@ -45,9 +45,9 @@ Cross-tool plugin (Copilot + Claude Code) with:
 
 ### Dogfooding
 
-- [x] `.instructions.md` files for this repo
-- [ ] Verify plugin works with Copilot agent mode
-- [ ] Verify plugin works with Claude Code
+- [x] `AGENTS.md` governs active repo guidance
+- [ ] Verify plugin works across supported agent
+  hosts
 
 ## Planned
 

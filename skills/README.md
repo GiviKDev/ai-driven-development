@@ -10,10 +10,9 @@ Skills that work together with agents belong in
 `plugins/` instead.
 
 This is not an active tool-discovery location. To
-make a skill active in a project, place it under
-`.github/skills/<name>/`, `.agents/skills/<name>/`,
-`.claude/skills/<name>/`, or a plugin's `skills/`
-directory.
+make a skill active in a project, place it in the
+skill location your tool supports, or inside a
+plugin's `skills/` directory.
 
 Follow the Agent Skills convention: the directory
 name and `name` frontmatter must match, the name must

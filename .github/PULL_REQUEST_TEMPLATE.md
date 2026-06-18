@@ -9,5 +9,5 @@
 ## Checklist
 
 - [ ] `make pre-commit` passes
-- [ ] Changes follow [writing rules](.github/instructions/docs.instructions.md)
+- [ ] Changes follow [writing rules](../AGENTS.md)
 - [ ] New docs are cross-referenced from README if appropriate
