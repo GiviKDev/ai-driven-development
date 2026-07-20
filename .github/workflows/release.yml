@@ -38,7 +38,7 @@ jobs:
             echo "release=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         if: steps.check.outputs.release == 'true'
         with:
           node-version: lts/*
